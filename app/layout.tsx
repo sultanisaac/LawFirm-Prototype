@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { PrototypeBanner } from '@/components/PrototypeBanner';
+import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,7 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} min-h-screen`}>
         <PrototypeBanner />
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          {children}
+          <FloatingWhatsApp />
+        </LanguageProvider>
       </body>
     </html>
   );

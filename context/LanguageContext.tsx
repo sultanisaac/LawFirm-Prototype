@@ -1,25 +1,21 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
-import { Lang, copy, CopyShape } from "@/lib/copy";
+import React, { createContext, useContext } from "react";
+import { copy, CopyShape } from "@/lib/copy";
 
 interface LanguageContextValue {
-  lang: Lang;
-  toggleLang: () => void;
+  lang: "en";
   t: CopyShape;
 }
 
 const LanguageContext = createContext<LanguageContextValue>({
   lang: "en",
-  toggleLang: () => {},
   t: copy.en,
 });
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState<Lang>("en");
-  const toggleLang = () => setLang((prev) => (prev === "en" ? "id" : "en"));
   return (
-    <LanguageContext.Provider value={{ lang, toggleLang, t: copy[lang] }}>
+    <LanguageContext.Provider value={{ lang: "en", t: copy.en }}>
       {children}
     </LanguageContext.Provider>
   );
