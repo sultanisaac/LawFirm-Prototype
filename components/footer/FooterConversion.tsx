@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { MessageCircle, Mail, MapPin } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Linkedin, Instagram, Scale, ExternalLink, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/context/LanguageContext";
@@ -11,30 +11,33 @@ import {
   EMAIL_ADDRESS,
 } from "@/lib/cta-links";
 
+import { Badge } from "@/components/ui/badge";
+
 export function FooterConversion() {
   const { t, lang } = useLanguage();
 
   return (
-    <footer className="border-t border-border/60 bg-background">
+    <footer className="border-t border-border/60 bg-background pt-16 sm:pt-24 pb-12">
       <div className="container-wide">
-        <div className="py-16 sm:py-20 text-center flex flex-col items-center gap-6 border-b border-border/50">
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+        {/* Pre-footer CTA */}
+        <div className="text-center flex flex-col items-center gap-8 mb-20 sm:mb-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <Badge variant="outline" className="bg-primary/5 border-primary/20 text-primary uppercase tracking-[0.3em] px-4 py-1.5 rounded-full text-[10px] font-black">
             {t.footer.start_today}
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground max-w-lg leading-tight">
+          </Badge>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-foreground max-w-2xl leading-[1.1] tracking-tight">
             {t.footer.final_cta_title}
           </h2>
-          <p className="text-muted-foreground max-w-md text-sm sm:text-base leading-relaxed">
+          <p className="text-muted-foreground/80 max-w-md text-base sm:text-lg leading-relaxed font-medium">
             {t.footer.final_cta_subtitle}
           </p>
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4">
             <Button
               asChild
               size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold gap-2 amber-glow h-12 px-8 text-sm"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 font-black gap-3 h-14 px-10 text-base rounded-2xl shadow-xl shadow-primary/25 active:scale-[0.98] transition-all"
             >
               <a href={buildGeneralWhatsAppLink(lang)} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="h-4 w-4" />
+                <MessageCircle className="h-5 w-5" />
                 {t.footer.final_cta_btn}
               </a>
             </Button>
@@ -42,102 +45,151 @@ export function FooterConversion() {
               asChild
               variant="outline"
               size="lg"
-              className="border-border text-foreground hover:bg-secondary hover:border-primary/40 font-semibold gap-2 h-12 px-6 text-sm"
+              className="bg-card border-border/60 text-foreground hover:bg-secondary hover:border-primary/40 font-bold gap-3 h-14 px-10 text-base rounded-2xl active:scale-[0.98] transition-all"
             >
               <a href={buildGeneralEmailLink(lang)}>
-                <Mail className="h-4 w-4" />
+                <Mail className="h-5 w-5" />
                 {t.nav.cta_email}
               </a>
             </Button>
           </div>
         </div>
 
-        <div className="py-8">
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-            <div className="sm:col-span-2 flex flex-col gap-3">
-              <div>
-                <span className="text-base font-bold tracking-tight text-foreground">
+        <Separator className="bg-border/30 mb-16" />
+
+        {/* Footer Navigation */}
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-y-12 gap-x-8 mb-16">
+          <div className="col-span-2 md:col-span-2 flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <Scale className="h-6 w-6 text-primary" />
+                <span className="text-xl font-black tracking-tight text-foreground uppercase">
                   {t.nav.wordmark}
                 </span>
-                <span className="ml-2 text-xs text-muted-foreground uppercase tracking-widest">
-                  {t.nav.wordmark_sub}
-                </span>
               </div>
-              <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
+              <p className="text-sm text-muted-foreground/80 max-w-xs leading-relaxed font-medium">
                 {t.footer.tagline}
               </p>
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <MapPin className="h-3 w-3 text-primary shrink-0" />
-                {t.footer.office}
+            </div>
+            
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start gap-3 group">
+                <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  {t.footer.office}
+                </span>
+              </div>
+              <div className="flex items-center gap-4">
+                <a href="#" className="p-2 sm:p-2.5 rounded-xl bg-secondary/80 border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all">
+                  <Linkedin className="h-5 w-5" />
+                </a>
+                <a href="#" className="p-2 sm:p-2.5 rounded-xl bg-secondary/80 border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all">
+                  <Instagram className="h-5 w-5" />
+                </a>
               </div>
             </div>
+          </div>
 
-            <div className="flex flex-col gap-2.5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
-                {t.footer.nav_title}
-              </p>
+          <div className="col-span-1 flex flex-col gap-5">
+            <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-foreground/40 px-1">Legal Services</h3>
+            <div className="flex flex-col gap-3">
+              {t.services.items.slice(0, 5).map((service) => (
+                <a key={service.id} href="#services" className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors pl-1">
+                  {service.title}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="col-span-1 flex flex-col gap-5">
+            <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-foreground/40 px-1">Explore</h3>
+            <div className="flex flex-col gap-3">
               {[
                 { label: t.nav.services, href: "#services" },
                 { label: t.nav.faq, href: "#faq" },
                 { label: t.nav.contact, href: "#contact" },
-                { label: t.footer.privacy_link, href: "/privacy" },
-              ].map((item) =>
-                item.href.startsWith("#") ? (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                )
-              )}
+                { label: "Our Story", href: "#" },
+              ].map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors pl-1"
+                >
+                  {item.label}
+                </a>
+              ))}
             </div>
+          </div>
 
-            <div className="flex flex-col gap-2.5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-1">
-                {t.footer.contact_title}
-              </p>
+          <div className="col-span-2 md:col-span-2 flex flex-col gap-5">
+            <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-foreground/40 px-1">Connect With Us</h3>
+            <div className="flex flex-col gap-3 bg-secondary/30 p-5 rounded-2xl border border-border/40">
               <a
                 href={buildGeneralWhatsAppLink(lang)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center justify-between group"
               >
-                <MessageCircle className="h-3.5 w-3.5 text-primary" />
-                WhatsApp
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <MessageCircle className="h-4 w-4 text-primary" />
+                  </div>
+                  <span className="text-sm font-bold text-foreground">WhatsApp</span>
+                </div>
+                <ExternalLink className="h-3.5 w-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors" />
               </a>
+              <Separator className="bg-border/40" />
               <a
                 href={buildGeneralEmailLink(lang)}
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center justify-between group"
               >
-                <Mail className="h-3.5 w-3.5 text-primary" />
-                {EMAIL_ADDRESS}
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Mail className="h-4 w-4 text-primary" />
+                  </div>
+                  <span className="text-sm font-bold text-foreground truncate max-w-[120px] lg:max-w-none">{EMAIL_ADDRESS}</span>
+                </div>
+                <ExternalLink className="h-3.5 w-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors" />
               </a>
             </div>
+            <div className="mt-2 px-1">
+              <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 mb-1">Affiliation</p>
+              <p className="text-xs font-bold text-foreground">NUSALEXA · Indonesian Legal Partners</p>
+            </div>
           </div>
+        </div>
 
-          <Separator className="bg-border/50 mb-6" />
+        <Separator className="bg-border/30 mb-8" />
 
-          <div className="flex flex-col gap-2">
-            <p className="text-[11px] text-muted-foreground/60 font-semibold leading-relaxed">
-              ⚠ {t.footer.disclaimer}
-            </p>
-            <p className="text-[11px] text-muted-foreground/60 leading-relaxed">
+        {/* Disclaimer & Copyright */}
+        <div className="flex flex-col gap-6">
+          <div className="grid gap-4 opacity-50">
+            <div className="flex items-center gap-2">
+              <AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+              <p className="text-[10px] sm:text-[11px] text-muted-foreground font-medium leading-relaxed uppercase tracking-tighter">
+                Disclaimer: {t.footer.disclaimer}
+              </p>
+            </div>
+            <p className="text-[10px] sm:text-[11px] text-muted-foreground leading-relaxed">
               {t.footer.legal_note}
             </p>
-            <p className="text-[11px] text-muted-foreground/40 mt-1">{t.footer.copyright}</p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-border/20">
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground/40 uppercase tracking-widest text-center sm:text-left">
+              {t.footer.copyright}
+            </p>
+            <div className="flex items-center gap-6">
+              <Link href="/privacy" className="text-[10px] sm:text-xs font-bold text-muted-foreground/40 hover:text-primary transition-colors uppercase tracking-widest">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-[10px] sm:text-xs font-bold text-muted-foreground/40 hover:text-primary transition-colors uppercase tracking-widest">
+                Terms of Use
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </footer>
   );
 }
+
