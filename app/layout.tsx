@@ -2,8 +2,11 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { LanguageProvider } from '@/context/LanguageContext';
+import { BookingProvider } from '@/context/BookingContext';
 import { PrototypeBanner } from '@/components/PrototypeBanner';
 import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
+import CalInitializer from '@/components/booking/CalInitializer';
+import { BookingModal } from '@/components/booking/BookingModal';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,8 +26,12 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-screen`}>
         <PrototypeBanner />
         <LanguageProvider>
-          {children}
-          <FloatingWhatsApp />
+          <BookingProvider>
+            <CalInitializer />
+            <BookingModal />
+            {children}
+            <FloatingWhatsApp />
+          </BookingProvider>
         </LanguageProvider>
       </body>
     </html>

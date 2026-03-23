@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { MessageCircle, Mail, Menu, X, Scale } from "lucide-react";
+import { MessageCircle, Mail, Menu, X, Scale, Calendar } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/LanguageContext";
+import { useBooking } from "@/context/BookingContext";
 import { buildGeneralWhatsAppLink, buildGeneralEmailLink } from "@/lib/cta-links";
+import { CALCOM_EVENT_LINK, CALCOM_NAMESPACE } from "@/lib/cal-config";
 import { cn } from "@/lib/utils";
 import {
   Tooltip,
@@ -16,6 +18,7 @@ import {
 
 export function HeaderMobileFirst() {
   const { t, lang } = useLanguage();
+  const { openBookingModal } = useBooking();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
@@ -90,6 +93,23 @@ export function HeaderMobileFirst() {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
+                    <button
+                      className="hidden md:flex items-center justify-center w-9 h-9 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors bg-secondary/30"
+                      onClick={() => openBookingModal()}
+                      aria-label="Book Strategic Session"
+                    >
+                      <Calendar className="h-4 w-4" />
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{t.hero.cta_booking}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
                     <a
                       href={buildGeneralEmailLink(lang)}
                       className="flex items-center justify-center w-9 h-9 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors bg-secondary/30"
@@ -156,6 +176,16 @@ export function HeaderMobileFirst() {
                     <span className="text-xs">Email</span>
                   </a>
                 </div>
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    openBookingModal();
+                  }}
+                  className="mt-2 flex items-center justify-center gap-3 p-5 rounded-2xl bg-amber-500 text-amber-950 hover:bg-amber-400 transition-all font-black text-sm shadow-xl shadow-amber-500/20"
+                >
+                  <Calendar className="h-5 w-5" />
+                  {t.hero.cta_booking}
+                </button>
               </div>
             </nav>
           </div>

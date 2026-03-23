@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useLanguage } from "@/context/LanguageContext";
+import { useBooking } from "@/context/BookingContext";
 import { buildWhatsAppLinkFromForm, buildEmailLinkFromForm } from "@/lib/cta-links";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +34,7 @@ type FormValues = z.infer<typeof schema>;
 
 export function ContactForm() {
   const { t, lang } = useLanguage();
+  const { openBookingModal } = useBooking();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -42,6 +44,7 @@ export function ContactForm() {
     setValue,
     watch,
     trigger,
+    getValues,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -73,7 +76,15 @@ export function ContactForm() {
 
   const nextStep = async () => {
     const isValid = await trigger(["name", "whatsapp", "topic"]);
-    if (isValid) setStep(2);
+    if (isValid) {
+      const vals = getValues();
+      openBookingModal({
+        name: vals.name,
+        whatsapp: vals.whatsapp,
+        topic: vals.topic
+      });
+      // We don't advance to step 2 as we've moved to the booking modal.
+    }
   };
 
   const prevStep = () => setStep(1);

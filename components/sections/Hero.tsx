@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TrustChips } from "@/components/TrustChips";
 import { useLanguage } from "@/context/LanguageContext";
+import { useBooking } from "@/context/BookingContext";
 import { buildGeneralWhatsAppLink, buildGeneralEmailLink } from "@/lib/cta-links";
 import { cn } from "@/lib/utils";
+import { CALCOM_EVENT_LINK, CALCOM_NAMESPACE } from "@/lib/cal-config";
 import {
   Tooltip,
   TooltipContent,
@@ -16,6 +18,7 @@ import {
 
 export function Hero() {
   const { t, lang } = useLanguage();
+  const { openBookingModal } = useBooking();
 
   return (
     <section className="relative overflow-hidden">
@@ -84,25 +87,35 @@ export function Hero() {
 
             <TrustChips className="mt-1" />
 
-            <div className="flex flex-col sm:flex-row items-center gap-5 mt-4">
+            <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full sm:w-auto">
               <Button
-                asChild
                 size="lg"
+                onClick={() => openBookingModal()}
                 className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 font-bold gap-2.5 shadow-[0_8px_25px_-8px_hsl(38_78%_52%/0.4)] text-sm h-14 px-8 rounded-xl transition-all duration-300"
               >
+                <Calendar className="h-5 w-5" />
+                {t.hero.cta_booking}
+              </Button>
+
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto border-amber-500/20 text-foreground hover:bg-amber-500/5 font-bold gap-2.5 text-sm h-14 px-8 rounded-xl transition-all duration-300"
+              >
                 <a href={buildGeneralWhatsAppLink(lang)} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="h-5 w-5" />
+                  <MessageCircle className="h-5 w-5 text-amber-500" />
                   {t.hero.cta_wa}
                 </a>
               </Button>
-              
-              <a 
-                href={buildGeneralEmailLink(lang)}
-                className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors underline decoration-border/80 underline-offset-8 decoration-2 hover:decoration-primary/50"
-              >
-                {t.hero.cta_email}
-              </a>
             </div>
+            
+            <a 
+              href={buildGeneralEmailLink(lang)}
+              className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors self-center sm:self-start underline decoration-border/80 underline-offset-8 decoration-2 hover:decoration-primary/50"
+            >
+              {t.hero.cta_email}
+            </a>
 
             <p className="text-[11px] text-muted-foreground/60 leading-relaxed pt-2">
               {t.hero.disclaimer}

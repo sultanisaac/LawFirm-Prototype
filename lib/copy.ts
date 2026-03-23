@@ -36,6 +36,7 @@ export interface CopyShape {
     bullets: string[];
     cta_wa: string;
     cta_email: string;
+    cta_booking: string;
     disclaimer: string;
   };
   trust_chips: string[];
@@ -108,6 +109,11 @@ export interface CopyShape {
     intro: string;
     sections: { title: string; body: string }[];
   };
+  booking: {
+    title: string;
+    subtitle: string;
+    badge: string;
+  };
 }
 
 const en: CopyShape = {
@@ -132,6 +138,7 @@ const en: CopyShape = {
     ],
     cta_wa: "Start WhatsApp Consultation",
     cta_email: "Send Email Inquiry",
+    cta_booking: "Book Strategic Session",
     disclaimer:
       "Prototype website for demo purposes. All names, testimonials, and claims are fictional.",
   },
@@ -372,6 +379,11 @@ const en: CopyShape = {
       },
     ],
   },
+  booking: {
+    title: "Book a Strategic Session",
+    subtitle: "Select a date and time that works best for you. No initial fee, no pressure — just clear legal pathfinding.",
+    badge: "Scheduling",
+  },
 };
 
 const id: CopyShape = {
@@ -396,6 +408,7 @@ const id: CopyShape = {
     ],
     cta_wa: "Mulai Konsultasi WhatsApp",
     cta_email: "Kirim Pertanyaan via Email",
+    cta_booking: "Jadwalkan Sesi Strategis",
     disclaimer:
       "Website prototipe untuk demo. Semua nama, testimoni, dan klaim bersifat fiktif.",
   },
@@ -636,6 +649,11 @@ const id: CopyShape = {
         body: "Untuk pertanyaan terkait privasi, hubungi kami di hello@nusaleza-law.id atau via WhatsApp.",
       },
     ],
+  },
+  booking: {
+    title: "Jadwalkan Sesi Strategis",
+    subtitle: "Pilih tanggal dan waktu yang paling sesuai untuk Anda. Tanpa biaya awal, tanpa tekanan — hanya panduan hukum yang jelas.",
+    badge: "Penjadwalan",
   },
 };
 
