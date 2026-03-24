@@ -62,7 +62,7 @@ export function FooterConversion() {
           <div className="col-span-2 md:col-span-2 flex flex-col gap-6">
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
-                <Scale className="h-6 w-6 text-primary" />
+                <img src="/lawfirmlogo.png" alt="NUSALEXA" className="h-7 w-auto object-contain" />
                 <span className="text-xl font-black tracking-tight text-foreground uppercase">
                   {t.nav.wordmark}
                 </span>

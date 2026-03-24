@@ -55,7 +55,7 @@ export function HeaderMobileFirst() {
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative">
               <div className="absolute -inset-1.5 rounded-full bg-primary/10 blur-md group-hover:bg-primary/25 transition-all opacity-100" />
-              <Scale className="h-6 w-6 text-primary relative" />
+              <img src="/lawfirmlogo.png" alt="NUSALEXA" className="h-7 w-auto relative object-contain" />
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-tight text-foreground group-hover:text-primary transition-colors leading-none">

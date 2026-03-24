@@ -13,13 +13,16 @@ export function HeaderMinimal() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur-sm">
       <div className="container-wide flex h-16 items-center justify-between">
-        <Link href="/" className="flex flex-col leading-none group">
-          <span className="text-lg font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
-            {t.nav.wordmark}
-          </span>
-          <span className="text-[10px] font-medium tracking-widest uppercase text-muted-foreground">
-            {t.nav.wordmark_sub}
-          </span>
+        <Link href="/" className="flex items-center gap-3 group">
+          <img src="/lawfirmlogo.png" alt="NUSALEXA" className="h-6 w-auto object-contain" />
+          <div className="flex flex-col leading-none">
+            <span className="text-lg font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+              {t.nav.wordmark}
+            </span>
+            <span className="text-[10px] font-medium tracking-widest uppercase text-muted-foreground">
+              {t.nav.wordmark_sub}
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">

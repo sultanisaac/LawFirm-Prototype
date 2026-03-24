@@ -11,9 +11,12 @@ import Script from 'next/script';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'NUSALEXA Law Office — Business-First Legal Counsel in Jakarta',
+  title: 'NUSALEXA LAW OFFICE - Law Firm Prototype',
   description:
     'Fast, clear, and practical legal counsel for SMEs, startups, and investors in Indonesia.',
+  icons: {
+    icon: '/lawfirmlogo.png',
+  },
 };
 
 export default function RootLayout({

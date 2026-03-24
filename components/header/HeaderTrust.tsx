@@ -15,13 +15,16 @@ export function HeaderTrust() {
       <div className="container-wide">
         <div className="flex h-16 items-center justify-between gap-4">
           <div className="flex items-center gap-5 min-w-0">
-            <Link href="/" className="flex flex-col leading-none shrink-0 group">
-              <span className="text-lg font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
-                {t.nav.wordmark}
-              </span>
-              <span className="text-[10px] font-medium tracking-widest uppercase text-muted-foreground">
-                {t.nav.wordmark_sub}
-              </span>
+            <Link href="/" className="flex items-center gap-3 shrink-0 group">
+              <img src="/lawfirmlogo.png" alt="NUSALEXA" className="h-6 w-auto object-contain" />
+              <div className="flex flex-col leading-none">
+                <span className="text-lg font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                  {t.nav.wordmark}
+                </span>
+                <span className="text-[10px] font-medium tracking-widest uppercase text-muted-foreground">
+                  {t.nav.wordmark_sub}
+                </span>
+              </div>
             </Link>
             <div className="hidden lg:flex items-center gap-2">
               <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground border border-border/50 rounded-full px-2.5 py-1">
