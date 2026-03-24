@@ -5,13 +5,13 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Radix UI](https://img.shields.io/badge/Radix_UI-Latest-6E56CF?style=flat-square&logo=radix-ui)](https://www.radix-ui.com/)
 
-A modern, high-performance, and bilingual (English/Indonesian) legal services prototype designed for **NUSALEXA Law Office**. This project showcases a "business-first" approach to legal counsel in Jakarta, focusing on SMEs, startups, and investors.
+A modern, high-performance legal services prototype designed for **NUSALEXA Law Office**. This project showcases a "business-first" approach to legal counsel in Jakarta, focusing on SMEs, startups, and investors.
 
 ---
 
 ## ✨ Features
 
-- **🌐 Multi-language Support (i18n)**: Fully bilingual interface (English and Indonesian) with dynamic content switching.
+- **🌐 Multi-language Support (i18n)**: Fully supported interface with dynamic content switching between English and Indonesian.
 - **⚡ Modern Tech Stack**: Built with Next.js 13.5 (App Router), TypeScript, and Tailwind CSS for speed and maintainability.
 - **🎨 Premium Design**: Features a dark-themed, cinematic aesthetic with smooth animations, frosted glass effects, and a responsive layout.
 - **📱 Mobile-First approach**: Optimized for all devices, from desktop to mobile.

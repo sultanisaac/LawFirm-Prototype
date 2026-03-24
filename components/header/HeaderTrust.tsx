@@ -30,7 +30,7 @@ export function HeaderTrust() {
               </div>
               <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground border border-border/50 rounded-full px-2.5 py-1">
                 <Globe className="h-2.5 w-2.5 text-primary" />
-                Bilingual
+                Expert Counsel
               </div>
             </div>
           </div>

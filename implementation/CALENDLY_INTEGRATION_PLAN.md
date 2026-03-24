@@ -1,97 +1,45 @@
 # Calendly Integration Plan - LawFirm-Prototype
 
-This document outlines the strategy for replacing the current Cal.com booking system with a customized Calendly integration, supporting both inline and modal-based booking flows.
+This document outlines the strategy for replacing the current Cal.com booking system with a customized Calendly integration.
+
+**Core Philosophy:** 
+- **Embed-Only**: We use the Calendly JS embed, NOT the Scheduling API. 
+- **Calendly-Native Management**: Admins manage all Event Types, Questions, Locations, and Timezones directly within the Calendly Dashboard. Our site acts only as a branded portal for this experience.
 
 ## A) Recommended Embed Approach
-We will use the **Calendly Advanced JS Embed** (via their standard script and `window.Calendly` global) rather than a raw `<iframe>` tag.
-
-### Reasoning:
-1. **Dynamic Customization**: Allows passing branding parameters (`primary_color`, `background_color`) programmatically.
-2. **Modal Support**: Built-in support for popups, ensuring consistent behavior across the site.
-3. **Data Pre-filling**: Enables pre-filling invitee information (Name, Email) from our internal state without hard-coding it in the URL.
-4. **Lifecycle Hooks**: Proper mapping of callback events (e.g., `onEventScheduled`) for future tracking or UI feedback.
-5. **Next.js Performance**: Better interaction with `next/script` for optimized loading and initialization.
-
-## B) Step-by-Step Task List
+We will use the **Calendly Advanced JS Embed** (triggered via the `window.Calendly` global) to power a **Multi-Step Modal**.
 
 ### 1. Configuration & Setup
-- [ ] Record Calendly Event Type URL and branding colors in `lib/calendly-config.ts`.
-- [ ] Add `NEXT_PUBLIC_CALENDLY_URL` to `.env.local`.
-- [ ] Define global types for `window.Calendly` in `types/calendly.d.ts`.
+- [x] Record Calendly Event Type URL and branding colors in `lib/calendly-config.ts`.
+- [x] Add `NEXT_PUBLIC_CALENDLY_URL`, `NEXT_PUBLIC_BRAND_COLOR`, etc., to `.env`.
+- [x] Update `types/calendly.d.ts` to support the custom prefill object.
 
-### 2. Core Components
-- [ ] **`CalendlyInline.tsx`**: A client-side component wrapping the inline embed widget.
-- [ ] **`CalendlyModal.tsx`**: A client-side component/hook to trigger the Calendly popup.
-- [ ] **`CalendlyProvider.tsx`**: (Optional) Use `next/script` in `layout.tsx` or a dedicated provider to load the Calendly JS safely.
+### 2. The Multi-Step Booking Modal
+- [x] **Phase 1: Qualification Form**: Create a 2-page form inside `BookingModal.tsx`.
+- [x] **Phase 2: Calendly Integration**: On the final page, load the Calendly embed with prefilled data.
 
-### 3. Integration & Refactoring
-- [ ] Replace `BookingInline` call in `components/sections/BookingSection.tsx` with `CalendlyInline`.
-- [ ] Deprecate/Remove `components/booking/BookingInline.tsx` and `CalInitializer.tsx` once verified.
-- [ ] Add Calendly trigger to main CTA buttons (e.g., in `Hero.tsx`).
+### 3. Data Capture & Handover
+The modal asks 5 high-level questions for lead capture, which are then carried into Calendly:
+1. **Full Name** -> (Passed to Calendly field: Name)
+2. **Email Address** -> (Passed to Calendly field: Email)
+3. **Legal Area** -> (Passed to internal context/prefill)
+4. **Company / Entity Name** -> (Passed to internal context/prefill)
+5. **Conflict Check / Objective** -> (Passed as part of the "Notes" or prefill to Calendly)
 
-### 4. Branding & Customization
-- [ ] Map LawFirm primary amber (`#dfa129`) to Calendly's `primary_color`.
-- [ ] Set `background_color` and `text_color` to match current dark theme aesthetic.
-- [ ] Configure `hide_gdpr_banner` based on privacy requirements.
+*Note: All final booking logic (e.g., secondary questions or specific locations) is managed by admins inside their Calendly account.*
 
-### 5. Data Capture & Prefilling
-- [ ] Configure "Invitee Questions" in the Calendly dashboard.
-- [ ] Implement `prefill` logic in `CalendlyInline` to support optional name/email passing.
+### 4. Integration Triggers
+- [x] **Header Button**: Update the "Book Strategic Session" icon (beside the Email icon) in `HeaderMobileFirst.tsx` to open the modal.
+- [x] **Primary Hero CTA**: Update "Book Strategic Session" in `Hero.tsx` to open the modal.
+- [x] **Contact Form Submission**: Update `ContactForm.tsx` to trigger the modal upon "Continue" or "Submit", mapping captured Name/Email to the modal context.
+- [x] **Booking Section**: Update `BookingSection.tsx` (centered premium CTA) to open the modal.
 
-### 6. Verification & QA
-- [ ] Test on multiple browsers (Chrome, Safari, Firefox).
-- [ ] Verify mobile responsiveness and scroll behavior inside the embed.
-
----
-
-## C) Files/Components to Add or Modify
-
-### New Files
-- `lib/calendly-config.ts`: Configuration constants (URL, brand colors).
-- `components/booking/CalendlyInline.tsx`: The main inline booking component.
-- `components/booking/CalendlyModalTrigger.tsx`: A button component to open the popup.
-
-### Modified Files
-- `app/layout.tsx`: Load the Calendly script via `next/script`.
-- `components/sections/BookingSection.tsx`: Update to use `CalendlyInline`.
-- `components/sections/Hero.tsx`: Update "Book Now" buttons to use the modal trigger.
-- `package.json`: (Cleanup) Remove `@calcom/embed-react` if no longer needed.
-
----
-
-## D) Environment/Config Needed
-
-Store the following in `.env.local` and Vercel dashboard:
-```env
-NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-firm/consultation
-NEXT_PUBLIC_BRAND_COLOR=dfa129  # Hex without # for Calendly params
-NEXT_PUBLIC_BG_COLOR=0b0e14     # Match dark theme
-NEXT_PUBLIC_TEXT_COLOR=ffffff   # Contrast color
-```
-
----
-
-## E) QA Checklist
-- [ ] **Cross-Browser**: Check Safari (Mac/iOS) specifically for iframe height/scroll issues.
-- [ ] **Mobile**: Ensure the "Invitee Questions" fields are usable on small screens.
-- [ ] **Adblockers**: Verify the script loads even if aggressive adblockers are active (common issue with third-party widgets).
-- [ ] **Cookie Banner**: Check if Calendly's internal GDPR banner overlaps with our site's UI.
-- [ ] **Timezones**: Confirm the widget correctly detects the user's local timezone.
-- [ ] **Layout Shift**: Ensure the container has a `min-height` to prevent CLS while the widget loads.
-
----
-
-## F) Rollout Plan
-1. **Local Dev**: Verify script loading and branding parameters.
-2. **Staging**: Deploy to a Vercel preview branch for internal stakeholders.
-3. **Production**: Swap components on `main` branch.
-4. **Cleanup**: Remove old Cal.com dependencies and config files.
-5. **Fallback**: If the script fails to load after 5 seconds, show a direct link button ("Open booking in new tab") to avoid blocking the user flow.
-
----
-
-## G) Future Upgrades
-- **Prefill Integration**: Pass user data from a "Lead Capture" form directly into Calendly.
-- **UTM Tracking**: Pass `utm_source`, `utm_campaign` etc. into the embed to track conversion sources.
-- **Webhook Integration**: Connect Calendly webhooks to the internal CRM/Supabase once we upgrade to Calendly Standard/Pro.
-- **Multi-language Support**: Dynamically set `locale` based on current website language context.
+### 5. Final Implementation Checklist
+- [x] **Environment Setup**: `NEXT_PUBLIC_CALENDLY_URL` and branding tokens configured in `.env`.
+- [x] **TypeScript Definitions**: `window.Calendly` properly typed in `types/calendly.d.ts`.
+- [x] **Security Headers**: No CSP or SSR issues with `next/script` loading.
+- [x] **Multi-Step Persistence**: Modal correctly captures and holds 5 qualification questions.
+- [x] **Data Handover**: Name & Email successfully prefill into the Calendly widget.
+- [x] **Branding Alignment**: Widget background matches site dark theme (#0b0e14).
+- [x] **Trigger Sync**: All "Book Strategic Session" buttons throughout the site open the new modal.
+- [x] **Legacy Cleanup**: Removed `@calcom/embed-react` and associated legacy files.

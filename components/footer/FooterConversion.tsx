@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { MessageCircle, Mail, MapPin, Linkedin, Instagram, Scale, ExternalLink, AlertTriangle } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Linkedin, Instagram, Scale, ExternalLink, AlertTriangle, Calendar, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/context/LanguageContext";
+import { useBooking } from "@/context/BookingContext";
 import {
   buildGeneralWhatsAppLink,
   buildGeneralEmailLink,
@@ -15,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 
 export function FooterConversion() {
   const { t, lang } = useLanguage();
+  const { openBookingModal } = useBooking();
 
   return (
     <footer className="border-t border-border/60 bg-background pt-16 sm:pt-24 pb-12">
@@ -32,14 +34,12 @@ export function FooterConversion() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4">
             <Button
-              asChild
+              onClick={() => openBookingModal()}
               size="lg"
               className="bg-primary text-primary-foreground hover:bg-primary/90 font-black gap-3 h-14 px-10 text-base rounded-2xl shadow-xl shadow-primary/25 active:scale-[0.98] transition-all"
             >
-              <a href={buildGeneralWhatsAppLink(lang)} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="h-5 w-5" />
-                {t.footer.final_cta_btn}
-              </a>
+              <Calendar className="h-5 w-5" />
+              {t.footer.final_cta_btn}
             </Button>
             <Button
               asChild
@@ -124,6 +124,19 @@ export function FooterConversion() {
           <div className="col-span-2 md:col-span-2 flex flex-col gap-5">
             <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-foreground/40 px-1">Connect With Us</h3>
             <div className="flex flex-col gap-3 bg-secondary/30 p-5 rounded-2xl border border-border/40">
+              <button
+                onClick={() => openBookingModal()}
+                className="flex items-center justify-between group w-full text-left"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Calendar className="h-4 w-4 text-primary" />
+                  </div>
+                  <span className="text-sm font-bold text-foreground">{t.booking.title}</span>
+                </div>
+                <ArrowRight className="h-3.5 w-3.5 text-muted-foreground/30 group-hover:text-primary transition-colors" />
+              </button>
+              <Separator className="bg-border/40" />
               <a
                 href={buildGeneralWhatsAppLink(lang)}
                 target="_blank"

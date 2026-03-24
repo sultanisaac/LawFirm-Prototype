@@ -118,7 +118,7 @@ export interface CopyShape {
 
 const en: CopyShape = {
   nav: {
-    wordmark: "NUSALEXA",
+    wordmark: "NUSALEXA (PROTOTYPE)",
     wordmark_sub: "Law Office",
     services: "Services",
     faq: "FAQ",
@@ -134,7 +134,7 @@ const en: CopyShape = {
     bullets: [
       "Contracts drafted & reviewed within 48 hours",
       "Fixed-fee options — no surprise invoices",
-      "Bilingual (EN/ID) documents & representation",
+      "Confidential & NDA-ready consultations",
     ],
     cta_wa: "Start WhatsApp Consultation",
     cta_email: "Send Email Inquiry",
@@ -142,7 +142,7 @@ const en: CopyShape = {
     disclaimer:
       "Prototype website for demo purposes. All names, testimonials, and claims are fictional.",
   },
-  trust_chips: ["Confidential", "NDA-Ready", "Bilingual (ID/EN)", "Fast Response"],
+  trust_chips: ["Confidential", "NDA-Ready", "Fast Response", "Expert Guidance"],
   services: {
     title: "Legal Services",
     subtitle:
@@ -246,7 +246,7 @@ const en: CopyShape = {
       {
         number: "03",
         title: "Delivery",
-        desc: "Receive your documents, legal advice, or agreed next steps within the confirmed timeframe. Clear, actionable, and bilingual.",
+        desc: "Receive your documents, legal advice, or agreed next steps within the confirmed timeframe. Clear and actionable.",
       },
     ],
   },
@@ -388,7 +388,7 @@ const en: CopyShape = {
 
 const id: CopyShape = {
   nav: {
-    wordmark: "NUSALEXA",
+    wordmark: "NUSALEXA (PROTOTYPE)",
     wordmark_sub: "Kantor Hukum",
     services: "Layanan",
     faq: "FAQ",
@@ -404,7 +404,7 @@ const id: CopyShape = {
     bullets: [
       "Kontrak disusun & ditinjau dalam 48 jam",
       "Opsi biaya tetap — tanpa tagihan mengejutkan",
-      "Bilingual (EN/ID) — dokumen & representasi",
+      "Konsultasi rahasia & siap dengan NDA",
     ],
     cta_wa: "Mulai Konsultasi WhatsApp",
     cta_email: "Kirim Pertanyaan via Email",
@@ -412,7 +412,7 @@ const id: CopyShape = {
     disclaimer:
       "Website prototipe untuk demo. Semua nama, testimoni, dan klaim bersifat fiktif.",
   },
-  trust_chips: ["Rahasia", "Siap NDA", "Bilingual (ID/EN)", "Respons Cepat"],
+  trust_chips: ["Rahasia", "Siap NDA", "Respons Cepat", "Panduan Ahli"],
   services: {
     title: "Layanan Hukum",
     subtitle:
@@ -516,7 +516,7 @@ const id: CopyShape = {
       {
         number: "03",
         title: "Pengiriman",
-        desc: "Terima dokumen, saran hukum, atau langkah selanjutnya yang disepakati sesuai jangka waktu yang dikonfirmasi. Jelas, dapat ditindaklanjuti, dan bilingual.",
+        desc: "Terima dokumen, saran hukum, atau langkah selanjutnya yang disepakati sesuai jangka waktu yang dikonfirmasi. Jelas dan dapat ditindaklanjuti.",
       },
     ],
   },

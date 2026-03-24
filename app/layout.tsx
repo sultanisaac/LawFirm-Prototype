@@ -5,15 +5,15 @@ import { LanguageProvider } from '@/context/LanguageContext';
 import { BookingProvider } from '@/context/BookingContext';
 import { PrototypeBanner } from '@/components/PrototypeBanner';
 import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
-import CalInitializer from '@/components/booking/CalInitializer';
 import { BookingModal } from '@/components/booking/BookingModal';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'NUSALEXA Law Office — Business-First Legal Counsel in Jakarta',
   description:
-    'Fast, clear, and practical legal counsel for SMEs, startups, and investors in Indonesia. Bilingual EN/ID.',
+    'Fast, clear, and practical legal counsel for SMEs, startups, and investors in Indonesia.',
 };
 
 export default function RootLayout({
@@ -27,10 +27,13 @@ export default function RootLayout({
         <PrototypeBanner />
         <LanguageProvider>
           <BookingProvider>
-            <CalInitializer />
             <BookingModal />
             {children}
             <FloatingWhatsApp />
+            <Script
+              src="https://assets.calendly.com/assets/external/widget.js"
+              strategy="afterInteractive"
+            />
           </BookingProvider>
         </LanguageProvider>
       </body>

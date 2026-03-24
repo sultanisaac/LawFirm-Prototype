@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/LanguageContext";
 import { useBooking } from "@/context/BookingContext";
 import { buildGeneralWhatsAppLink, buildGeneralEmailLink } from "@/lib/cta-links";
-import { CALCOM_EVENT_LINK, CALCOM_NAMESPACE } from "@/lib/cal-config";
 import { cn } from "@/lib/utils";
 import {
   Tooltip,
