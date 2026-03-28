@@ -93,8 +93,6 @@ npm run dev
 ## 🛤️ Roadmap
 - [x] **Phase 1**: High-fidelity UI & i18n Engine (Jakarta/Global focus).
 - [x] **Phase 2**: Custom Calendly Integration with Data Handover.
-- [ ] **Phase 3**: Supabase Auth & Secure Client Document Portal.
-- [ ] **Phase 4**: Automated Legal Retainer Payment Flow (Stripe).
 
 ---
 
