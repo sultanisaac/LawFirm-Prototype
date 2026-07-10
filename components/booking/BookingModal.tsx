@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ShieldCheck, ArrowRight, User, Mail, Calendar, ChevronLeft, X } from "lucide-react";
-import { CALENDLY_URL, BRAND_COLOR, BG_COLOR, TEXT_COLOR } from "@/lib/calendly-config";
+import { ShieldCheck, ArrowRight, User, Mail, Calendar, ChevronLeft, X } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -32,8 +32,8 @@ export function BookingModal() {
   const { isOpen, prefillData, closeBookingModal } = useBooking();
   const { t } = useLanguage();
   const [step, setStep] = useState<1 | 2>(1);
-  const [form, setForm] = useState({ name: "", email: "", topic: "" });
-  const embedRef = useRef<HTMLDivElement>(null);
+  const [form, setForm] = useState({ name: "", email: "", topic: "", date: "", time: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Reset form when modal opens & prefill from context
   useEffect(() => {
@@ -43,36 +43,34 @@ export function BookingModal() {
         name: prefillData?.name || "",
         email: prefillData?.email || "",
         topic: prefillData?.topic || "",
+        date: "",
+        time: "",
       });
+      setIsSubmitting(false);
     }
   }, [isOpen, prefillData]);
 
-  // Initialize Calendly embed when step 2 mounts
-  useEffect(() => {
-    if (step !== 2) return;
-
-    const tryInit = () => {
-      if (!embedRef.current || !window.Calendly) return;
-      // Clear any previous embed
-      embedRef.current.innerHTML = "";
-      window.Calendly.initInlineWidget({
-        url: `${CALENDLY_URL}?hide_gdpr_banner=1&primary_color=${BRAND_COLOR}&background_color=${BG_COLOR}&text_color=${TEXT_COLOR}`,
-        parentElement: embedRef.current,
-        prefill: {
-          name: form.name,
-          email: form.email,
-          customAnswers: { a1: form.topic },
-        },
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    try {
+      await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form)
       });
-    };
 
-    // Small delay to ensure DOM is ready
-    const timer = setTimeout(tryInit, 150);
-    return () => {
-      clearTimeout(timer);
-      if (embedRef.current) embedRef.current.innerHTML = "";
-    };
-  }, [step]);
+      // wa.me URL
+      const message = `Hi, I just submitted a booking request for ${form.topic} on ${form.date} at ${form.time}. My email is ${form.email}.`;
+      const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
+      
+      window.open(waUrl, '_blank');
+      closeBookingModal();
+    } catch (error) {
+      console.error("Booking failed", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const isValid = form.name.trim().length >= 2 && form.email.includes("@") && form.topic.length > 0;
 
@@ -219,9 +217,9 @@ export function BookingModal() {
           </div>
         )}
 
-        {/* ─── STEP 2: Calendly Calendar ─── */}
+        {/* ─── STEP 2: Custom Date & Time Picker ─── */}
         {step === 2 && (
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full overflow-hidden">
             {/* Back bar */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-white/[0.07] shrink-0">
               <button
@@ -235,8 +233,6 @@ export function BookingModal() {
               <div className="flex items-center gap-2 min-w-0">
                 <span className="text-[11px] font-black uppercase tracking-widest text-amber-400/80 shrink-0">Booking for</span>
                 <span className="text-sm font-bold text-white truncate">{form.name}</span>
-                <span className="text-white/30 text-sm shrink-0">·</span>
-                <span className="text-xs text-white/40 truncate hidden sm:block">{form.email}</span>
               </div>
               <button
                 onClick={closeBookingModal}
@@ -246,14 +242,46 @@ export function BookingModal() {
               </button>
             </div>
 
-            {/* Calendly embed */}
-            <div className="flex-1 overflow-hidden rounded-b-2xl bg-white">
-              <div
-                ref={embedRef}
-                id="calendly-embed-container"
-                className="w-full h-full"
-                style={{ minHeight: "600px" }}
-              />
+            {/* Custom inputs */}
+            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-5">
+              <div className="space-y-2">
+                <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
+                  Select Date <span className="text-amber-500">*</span>
+                </Label>
+                <Input
+                  type="date"
+                  value={form.date}
+                  onChange={(e) => setForm(f => ({ ...f, date: e.target.value }))}
+                  className="h-12 bg-white/5 border-white/10 rounded-xl text-white font-medium focus-visible:border-amber-500/60 transition-colors [color-scheme:dark]"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
+                  Select Time <span className="text-amber-500">*</span>
+                </Label>
+                <Input
+                  type="time"
+                  value={form.time}
+                  onChange={(e) => setForm(f => ({ ...f, time: e.target.value }))}
+                  className="h-12 bg-white/5 border-white/10 rounded-xl text-white font-medium focus-visible:border-amber-500/60 transition-colors [color-scheme:dark]"
+                />
+              </div>
+            </div>
+
+            {/* CTA Footer */}
+            <div className="px-6 pb-6 pt-4 border-t border-white/[0.07] shrink-0">
+              <Button
+                disabled={!form.date || !form.time || isSubmitting}
+                onClick={handleSubmit}
+                className="w-full h-14 bg-amber-500 hover:bg-amber-400 text-amber-950 font-black text-base rounded-xl gap-2.5 shadow-[0_8px_32px_rgba(215,165,32,0.3)] transition-all duration-200 active:scale-[0.98] disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? "Submitting..." : "Confirm & Request Booking"}
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+              <p className="text-center text-[10px] text-white/25 mt-3 font-medium">
+                You will be redirected to WhatsApp to confirm with our team.
+              </p>
             </div>
           </div>
         )}
