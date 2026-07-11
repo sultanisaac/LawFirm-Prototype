@@ -244,7 +244,156 @@ export async function POST(req: Request) {
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    const clientMailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email, // sending to the client
+      subject: `Consultation Request Received - NUSALEXA`,
+      html: `
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Consultation Request Received - NUSALEXA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base Reset */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+        body { margin: 0; padding: 0; width: 100% !important; height: 100% !important; background-color: #0b0e14; -webkit-font-smoothing: antialiased; }
+        
+        /* Hover Effects for Web Preview */
+        .btn-primary:hover { background-color: #f0b545 !important; border-color: #f0b545 !important; }
+        a:hover { color: #f0b545 !important; }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 600px) {
+            .email-container { width: 100% !important; max-width: 100% !important; }
+            .content-card { padding: 32px 20px !important; border-radius: 0px !important; border-left: none !important; border-right: none !important; }
+            .header-padding { padding: 30px 20px 20px !important; }
+            
+            /* Expand buttons on mobile */
+            .btn-table, .btn-wrapper { display: block !important; width: 100% !important; }
+            .btn { display: block !important; text-align: center !important; }
+        }
+    </style>
+</head>
+
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #0b0e14; font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+    <center style="width: 100%; background-color: #0b0e14;">
+        
+        <!-- Visually Hidden Preheader Text -->
+        <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+            Thank you for requesting a strategic consultation with NUSALEXA. Your request is currently under review by our team.
+        </div>
+
+        <!-- Main Email Container -->
+        <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: auto; width: 100%; max-width: 600px;" class="email-container">
+            
+            <tr>
+                <td class="header-padding" style="padding: 40px 0 30px; text-align: center;">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
+                        <tr>
+                            <td style="font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: 2px;">
+                                NUSALEXA <span style="color: #dfa129;">.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; color: #a0aab2; letter-spacing: 3px; padding-top: 4px; text-transform: uppercase;">
+                                Law Office | Dark Performance Lab
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding: 0 16px 40px;">
+                    <!-- Content Card Background -->
+                    <table class="content-card" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #10141e; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; border-top: 4px solid #dfa129; padding: 48px 40px;">
+                        
+                        <!-- Body Copy -->
+                        <tr>
+                            <td style="font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: #a0aab2;">
+                                <p style="margin: 0 0 24px; color: #ffffff; font-weight: 600; font-size: 18px;">
+                                    Hello ${name},
+                                </p>
+                                
+                                <p style="margin: 0 0 24px;">
+                                    Thank you for requesting a strategic consultation with NUSALEXA.
+                                </p>
+
+                                <!-- Highlighted Request Details -->
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 24px;">
+                                    <tr>
+                                        <td style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-left: 3px solid #dfa129; border-radius: 8px; padding: 20px; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: #a0aab2;">
+                                            We have received your request to discuss <strong style="color: #ffffff; font-weight: 600;">${topic}</strong> on <strong style="color: #ffffff; font-weight: 600;">${date}</strong> at <strong style="color: #ffffff; font-weight: 600;">${time}</strong>.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <p style="margin: 0 0 24px;">
+                                    Our team is currently reviewing our calendar to ensure we can provide the focused, dedicated attention your matter requires. You will receive a follow-up email shortly with final confirmation and a secure Google Meet link once your appointment is locked in.
+                                </p>
+
+                                <p style="margin: 0 0 32px;">
+                                    If your matter is highly urgent, or if you have specific documents you would like us to review prior to the call, you may reply directly to this email.
+                                </p>
+
+                                <p style="margin: 0 0 40px;">
+                                    Best regards,<br>
+                                    <strong style="color: #ffffff; font-weight: 600;">NUSALEXA Law Office</strong>
+                                </p>
+                            </td>
+                        </tr>
+
+                        <!-- Action Button -->
+                        <tr>
+                            <td align="left">
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="btn-table">
+                                    <tr>
+                                        <td class="btn-wrapper">
+                                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                <tr>
+                                                    <td style="border-radius: 12px; background-color: #dfa129; text-align: center;">
+                                                        <a href="https://lawfirm-prototype.vercel.app/" target="_blank" class="btn btn-primary" style="display: inline-block; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #422006; text-decoration: none; padding: 14px 32px; border-radius: 12px; border: 1px solid #dfa129;">
+                                                            NUSALEXA Law Office
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            
+            <!-- Safe Area Padding Bottom -->
+            <tr><td style="padding-bottom: 40px;"></td></tr>
+            
+        </table>
+    </center>
+</body>
+</html>
+      `,
+    };
+
+    // Send both emails in parallel
+    await Promise.all([
+      transporter.sendMail(mailOptions),
+      transporter.sendMail(clientMailOptions),
+    ]);
 
     return NextResponse.json({ success: true });
   } catch (error) {
