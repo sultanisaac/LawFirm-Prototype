@@ -16,7 +16,7 @@ export function PrototypeBanner() {
           <FlaskConical className="h-4 w-4 text-amber-400 shrink-0" />
           <p className="text-xs sm:text-sm font-semibold text-amber-300 tracking-wide">
             <span className="font-bold text-amber-400 uppercase tracking-widest">PROTOTYPE</span>
-            <span className="hidden sm:inline text-amber-300/80 font-normal mx-2">—</span>
+            <span className="hidden sm:inline text-amber-300/80 font-normal mx-2"> </span>
             <span className="hidden sm:inline text-amber-300/80 font-normal">
               This website is a work-in-progress prototype and not yet in live operation.
             </span>

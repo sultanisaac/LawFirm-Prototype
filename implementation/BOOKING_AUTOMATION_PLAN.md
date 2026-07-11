@@ -66,6 +66,6 @@ If a booking is already confirmed but an emergency requires the business to canc
   - [x] Google Calendar automatic invite
   - [x] Client phone number/details saved in event description
   - [x] Trigger polite cancellation email to client via Resend if declined
-- [ ] **Phase 4: Emergency Cancellations (Post-Confirmation)**
-  - [ ] Manual or Automated process handling
+- [x] **Phase 4: Emergency Cancellations (Post-Confirmation)**
+  - [x] Manual or Automated process handling
 
