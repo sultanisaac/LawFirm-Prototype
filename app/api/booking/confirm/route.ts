@@ -14,6 +14,11 @@ export async function GET(req: Request) {
   try {
     const decoded: any = jwt.verify(token, process.env.JWT_SECRET || 'secret123');
     
+    // Format date for display
+    const [year, month, day] = decoded.date.split('-');
+    const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][parseInt(month) - 1];
+    const displayDate = `${parseInt(day)} ${monthName} ${year}`;
+    
     // Phase 3: Create Google Calendar Event
     let googleMeetLink = '';
     try {
@@ -132,7 +137,7 @@ export async function GET(req: Request) {
                                 </table>
 
                                 <p style="margin: 0 0 32px;">
-                                    We have locked in our calendar to discuss <strong style="color: #ffffff; font-weight: 600;">${decoded.topic}</strong> on <strong style="color: #ffffff; font-weight: 600;">${decoded.date}</strong> at <strong style="color: #ffffff; font-weight: 600;">${decoded.time}</strong>.
+                                    We have locked in our calendar to discuss <strong style="color: #ffffff; font-weight: 600;">${decoded.topic}</strong> on <strong style="color: #ffffff; font-weight: 600;">${displayDate}</strong> at <strong style="color: #ffffff; font-weight: 600;">${decoded.time}</strong>.
                                 </p>
 
                                 ${googleMeetLink ? `<!-- Distinct Highlight Box for Google Meet Link -->

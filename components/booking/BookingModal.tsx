@@ -6,9 +6,9 @@ import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ShieldCheck, ArrowRight, User, Mail, Phone, Calendar as CalendarIcon, ChevronLeft, X } from "lucide-react";
+import { ShieldCheck, ArrowRight, User, Mail, Phone, Calendar as CalendarIcon, ChevronLeft, X, Building2 } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
-import { format, isBefore, startOfToday, isWeekend } from "date-fns";
+import { format, parse, isBefore, startOfToday, isWeekend } from "date-fns";
 import {
   Select,
   SelectContent,
@@ -38,7 +38,7 @@ export function BookingModal() {
   const { isOpen, prefillData, closeBookingModal } = useBooking();
   const { t } = useLanguage();
   const [step, setStep] = useState<1 | 2 | 3>(1);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", topic: "", date: "", time: "" });
+  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", topic: "", date: "", time: "" });
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -49,6 +49,7 @@ export function BookingModal() {
       setForm({
         name: prefillData?.name || "",
         email: prefillData?.email || "",
+        company: "",
         phone: "",
         topic: prefillData?.topic || "",
         date: "",
@@ -69,7 +70,14 @@ export function BookingModal() {
       });
 
       // wa.me URL
-      const message = `Hi, I just submitted a booking request for ${form.topic} on ${form.date} at ${form.time}. My email is ${form.email}.`;
+      const companyText = form.company ? ` / ${form.company}` : '';
+      const displayDate = form.date ? format(parse(form.date, 'yyyy-MM-dd', new Date()), 'dd MMMM yyyy') : '';
+      const message = `Hi NUSALEXA, I just submitted a booking request.
+Topic: ${form.topic}
+Name/Company: ${form.name}${companyText}
+Email: ${form.email}
+Phone: ${form.phone}
+Timeline: ${displayDate} at ${form.time}`;
       const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
       
       window.open(waUrl, '_blank');
@@ -153,6 +161,22 @@ export function BookingModal() {
                     placeholder="Your full name"
                     className="pl-10 h-12 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
                     autoComplete="name"
+                  />
+                </div>
+              </div>
+
+              {/* Company */}
+              <div className="space-y-2">
+                <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
+                  Company Name <span className="text-white/30 capitalize tracking-normal font-medium">(Optional)</span>
+                </Label>
+                <div className="relative">
+                  <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+                  <Input
+                    value={form.company}
+                    onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))}
+                    placeholder="Your company name"
+                    className="pl-10 h-12 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
                   />
                 </div>
               </div>
@@ -374,7 +398,14 @@ export function BookingModal() {
             <div className="space-y-3 w-full">
               <Button
                 onClick={() => {
-                  const message = `Hi, I just submitted a booking request for ${form.topic} on ${form.date} at ${form.time}. My email is ${form.email}.`;
+                  const companyText = form.company ? ` / ${form.company}` : '';
+                  const displayDate = form.date ? format(parse(form.date, 'yyyy-MM-dd', new Date()), 'dd MMMM yyyy') : '';
+                  const message = `Hi NUSALEXA, I just submitted a booking request.
+Topic: ${form.topic}
+Name/Company: ${form.name}${companyText}
+Email: ${form.email}
+Phone: ${form.phone}
+Timeline: ${displayDate} at ${form.time}`;
                   window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(message)}`, '_blank');
                 }}
                 className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold rounded-xl transition-all"

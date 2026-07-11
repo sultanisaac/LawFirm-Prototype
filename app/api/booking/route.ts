@@ -5,11 +5,16 @@ import jwt from 'jsonwebtoken';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, phone, topic, date, time } = body;
+    const { name, company, email, phone, topic, date, time } = body;
 
     // Create a payload for the JWT
-    const payload = { name, email, phone, topic, date, time };
+    const payload = { name, company, email, phone, topic, date, time };
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'secret123', { expiresIn: '7d' });
+
+    // Format date for display
+    const [year, month, day] = date.split('-');
+    const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][parseInt(month) - 1];
+    const displayDate = `${parseInt(day)} ${monthName} ${year}`;
 
     // Base URL of the app (dynamically detected from the request, falling back to env variable)
     const requestUrl = new URL(req.url);
@@ -140,6 +145,10 @@ export async function POST(req: Request) {
                                                     <td class="data-value" width="70%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #ffffff; padding-bottom: 12px;">${name}</td>
                                                 </tr>
                                                 <tr class="data-row">
+                                                    <td class="data-label" width="30%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; color: #a0aab2; padding-bottom: 12px;">Company:</td>
+                                                    <td class="data-value" width="70%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #ffffff; padding-bottom: 12px;">${company || 'N/A'}</td>
+                                                </tr>
+                                                <tr class="data-row">
                                                     <td class="data-label" width="30%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; color: #a0aab2; padding-bottom: 12px;">Email:</td>
                                                     <td class="data-value" width="70%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #ffffff; padding-bottom: 12px;">
                                                         <a href="mailto:${email}" style="color: #ffffff; text-decoration: none;">${email}</a>
@@ -177,7 +186,7 @@ export async function POST(req: Request) {
                                                 </tr>
                                                 <tr class="data-row">
                                                     <td class="data-label" width="30%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; color: #a0aab2;">Date & Time:</td>
-                                                    <td class="data-value" width="70%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #dfa129;">${date} at ${time}</td>
+                                                    <td class="data-value" width="70%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #dfa129;">${displayDate} at ${time}</td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -335,7 +344,7 @@ export async function POST(req: Request) {
                                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 24px;">
                                     <tr>
                                         <td style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-left: 3px solid #dfa129; border-radius: 8px; padding: 20px; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: #a0aab2;">
-                                            We have received your request to discuss <strong style="color: #ffffff; font-weight: 600;">${topic}</strong> on <strong style="color: #ffffff; font-weight: 600;">${date}</strong> at <strong style="color: #ffffff; font-weight: 600;">${time}</strong>.
+                                            We have received your request to discuss <strong style="color: #ffffff; font-weight: 600;">${topic}</strong> on <strong style="color: #ffffff; font-weight: 600;">${displayDate}</strong> at <strong style="color: #ffffff; font-weight: 600;">${time}</strong>.
                                         </td>
                                     </tr>
                                 </table>

@@ -13,6 +13,15 @@ export async function GET(req: Request) {
   try {
     const decoded: any = jwt.verify(token, process.env.JWT_SECRET || 'secret123');
 
+    // Format date for display
+    const [year, month, day] = decoded.date.split('-');
+    const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][parseInt(month) - 1];
+    const displayDate = `${parseInt(day)} ${monthName} ${year}`;
+
+    const companyText = decoded.company ? ` / ${decoded.company}` : '';
+    const whatsappMessage = `Hi NUSALEXA, I need legal help with: ${decoded.topic}. Name/Company: ${decoded.name}${companyText}. Timeline: [today/this week/flexible].`;
+    const waUrl = `https://api.whatsapp.com/send/?phone=6281200000000&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -113,7 +122,7 @@ export async function GET(req: Request) {
                                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 24px;">
                                     <tr>
                                         <td style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-left: 3px solid #dfa129; border-radius: 8px; padding: 20px; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: #a0aab2;">
-                                            We are currently unable to accommodate your requested session on <strong style="color: #ffffff; font-weight: 600;">${decoded.date}</strong> at <strong style="color: #ffffff; font-weight: 600;">${decoded.time}</strong> due to a scheduling conflict.
+                                            We are currently unable to accommodate your requested session on <strong style="color: #ffffff; font-weight: 600;">${displayDate}</strong> at <strong style="color: #ffffff; font-weight: 600;">${decoded.time}</strong> due to a scheduling conflict.
                                         </td>
                                     </tr>
                                 </table>
@@ -143,7 +152,7 @@ export async function GET(req: Request) {
                                             <table role="presentation" cellspacing="0" cellpadding="0" border="0">
                                                 <tr>
                                                     <td style="border-radius: 12px; background-color: #dfa129; text-align: center;">
-                                                        <a href="https://api.whatsapp.com/send/?phone=6281200000000&text=Hi+NUSALEXA%2C+I+need+legal+help+with%3A+${encodeURIComponent(decoded.topic)}.+Name%2FCompany%3A+${encodeURIComponent(decoded.name)}.+Timeline%3A+%5Btoday%2Fthis+week%2Fflexible%5D.&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary" style="display: inline-block; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #422006; text-decoration: none; padding: 14px 32px; border-radius: 12px; border: 1px solid #dfa129;">
+                                                        <a href="${waUrl}" target="_blank" class="btn btn-primary" style="display: inline-block; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #422006; text-decoration: none; padding: 14px 32px; border-radius: 12px; border: 1px solid #dfa129;">
                                                             Chat via WhatsApp to Reschedule
                                                         </a>
                                                     </td>
