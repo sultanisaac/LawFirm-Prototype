@@ -26,7 +26,7 @@ The core of the prototype is the **Strategic Session Booking Engine**. Unlike st
 ### The Handover Flow
 1. **Qualification**: A 2-page modal captures critical data: *Full Name, Email, Legal Area, and Entity Name*.
 2. **Conflict Check**: Initial capture includes objective details for preliminary internal assessment.
-3. **Calendly Handover**: Data is seamlessly injected into the **Calendly Advanced JS Embed** via the custom `window.Calendly` global, prefilling the final scheduling screen for a zero-friction user experience.
+3. **Custom Booking Flow**: Data is seamlessly captured and handled via a custom Next.js API, saving details and coordinating the scheduling for a zero-friction user experience.
 
 ---
 
@@ -41,7 +41,7 @@ The core of the prototype is the **Strategic Session Booking Engine**. Unlike st
 ### Logic & State
 - **Form Management**: [React Hook Form](https://react-hook-form.com/)
 - **Schema Validation**: [Zod](https://zod.dev/)
-- **Scheduling**: [Calendly JS API](https://calendly.com/developer/)
+- **Scheduling**: Next.js API & Custom Google Calendar Integration
 - **Typing**: Strict [TypeScript 5.2](https://www.typescriptlang.org/)
 
 ---
@@ -53,8 +53,8 @@ The core of the prototype is the **Strategic Session Booking Engine**. Unlike st
 │   ├── header/           # Mobile-first navigation & Brand headers
 │   ├── sections/         # Feature blocks: Hero, Services, HowItWorks, FAQ
 │   └── ui/               # Base Shadcn/Radix primitives
-├── implementation/       # Feature blueprints (e.g., CALENDLY_INTEGRATION_PLAN.md)
-├── lib/                  # i18n Copy (copy.ts), Utils, & Calendly Config
+├── implementation/       # Feature blueprints (e.g., BOOKING_AUTOMATION_PLAN.md)
+├── lib/                  # i18n Copy (copy.ts) & Utils
 ├── types/                # Global TS definitions & API declarations
 ├── public/               # Optimized SVGs, Logos, & Static Assets
 └── .env                  # Environment branding & API tokens
@@ -78,7 +78,6 @@ npm install
 ### 3. Environment Setup
 Create a `.env` file in the root based on the following template:
 ```bash
-NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/your-event-link
 NEXT_PUBLIC_BRAND_COLOR=dfa129  # Primary Gold
 NEXT_PUBLIC_BG_COLOR=0b0e14     # Deep Slate
 ```
@@ -92,7 +91,7 @@ npm run dev
 
 ## 🛤️ Roadmap
 - [x] **Phase 1**: High-fidelity UI & i18n Engine (Jakarta/Global focus).
-- [x] **Phase 2**: Custom Calendly Integration with Data Handover.
+- [x] **Phase 2**: Custom Email/Google Calendar Booking Automation.
 
 ---
 

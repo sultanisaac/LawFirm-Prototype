@@ -26,14 +26,27 @@ export async function GET(req: Request) {
       to: decoded.email,
       subject: `Booking Update: ${decoded.topic}`,
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eaeaea; border-radius: 10px; padding: 20px;">
-          <h2 style="color: #ef4444;">Booking Update</h2>
-          <p style="color: #555;">Hi ${decoded.name},</p>
-          <p style="color: #555;">We are currently unable to accommodate your booking request for <strong>${decoded.topic}</strong> on <strong>${decoded.date}</strong> at <strong>${decoded.time}</strong>.</p>
-          <p style="color: #555;">Please contact us via WhatsApp to reschedule or find an alternative time.</p>
-          <hr style="border: none; border-top: 1px solid #eaeaea; margin: 20px 0;" />
-          <p style="color: #888; font-size: 12px;">Best regards,<br/>The Law Firm Team</p>
-        </div>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #0b0e14; font-family: 'Inter', Helvetica, Arial, sans-serif; padding: 40px 0;">
+          <tr>
+            <td align="center">
+              <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="background-color: #10141e; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; overflow: hidden;">
+                <tr>
+                  <td style="padding: 40px;">
+                    <h2 style="color: #ffffff; font-size: 24px; font-weight: 800; margin-top: 0; margin-bottom: 24px;">Booking Update</h2>
+                    <p style="color: #ffffff; font-size: 16px; font-weight: 500; margin-bottom: 16px;">Dear ${decoded.name},</p>
+                    <p style="color: #a0aab2; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">We are currently unable to accommodate your session for <strong style="color: #ffffff;">${decoded.topic}</strong> on <strong style="color: #ffffff;">${decoded.date}</strong> at <strong style="color: #ffffff;">${decoded.time}</strong>.</p>
+                    <p style="color: #a0aab2; font-size: 16px; line-height: 1.6; margin-bottom: 32px;">Please reach out to our team directly via WhatsApp so we can find an alternative time that works for you.</p>
+                    
+                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 24px;">
+                      <p style="color: #ffffff; font-size: 14px; font-weight: 700; margin-bottom: 4px;">NUSALEXA Law Office</p>
+                      <p style="color: #a0aab2; font-size: 14px; margin: 0;">Designed for Modern Business</p>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
       `,
     };
 

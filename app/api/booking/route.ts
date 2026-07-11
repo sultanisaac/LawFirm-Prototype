@@ -31,20 +31,37 @@ export async function POST(req: Request) {
       to: process.env.EMAIL_USER, // sending to the business owner
       subject: `New Booking Request from ${name}`,
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eaeaea; border-radius: 10px; padding: 20px;">
-          <h2 style="color: #333; border-bottom: 1px solid #eaeaea; padding-bottom: 10px;">New Booking Request</h2>
-          <p style="color: #555;"><strong>Name:</strong> ${name}</p>
-          <p style="color: #555;"><strong>Email:</strong> ${email}</p>
-          <p style="color: #555;"><strong>Topic:</strong> ${topic}</p>
-          <p style="color: #555;"><strong>Date:</strong> ${date}</p>
-          <p style="color: #555;"><strong>Time:</strong> ${time}</p>
-          <br/>
-          <div style="margin-top: 20px;">
-            <a href="${confirmLink}" style="padding: 12px 24px; background: #10b981; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">✅ Confirm Appointment</a>
-            <span style="display: inline-block; width: 10px;"></span>
-            <a href="${declineLink}" style="padding: 12px 24px; background: #ef4444; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">❌ Decline Appointment</a>
-          </div>
-        </div>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #0b0e14; font-family: 'Inter', Helvetica, Arial, sans-serif; padding: 40px 0;">
+          <tr>
+            <td align="center">
+              <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="background-color: #10141e; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; overflow: hidden;">
+                <tr>
+                  <td style="padding: 40px;">
+                    <h2 style="color: #ffffff; font-size: 24px; font-weight: 800; margin-top: 0; margin-bottom: 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 16px;">New Booking Request</h2>
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom: 32px;">
+                      <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">Name:</strong> <span style="color: #a0aab2;">${name}</span></td></tr>
+                      <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">Email:</strong> <span style="color: #a0aab2;">${email}</span></td></tr>
+                      <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">Topic:</strong> <span style="color: #a0aab2;">${topic}</span></td></tr>
+                      <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">Date:</strong> <span style="color: #a0aab2;">${date}</span></td></tr>
+                      <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">Time:</strong> <span style="color: #a0aab2;">${time}</span></td></tr>
+                    </table>
+                    <table role="presentation" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td align="center" style="border-radius: 12px; background-color: #dfa129;">
+                          <a href="${confirmLink}" style="font-size: 16px; font-weight: 700; color: #422006; text-decoration: none; padding: 14px 28px; border-radius: 12px; display: inline-block;">Confirm Appointment</a>
+                        </td>
+                        <td width="16"></td>
+                        <td align="center" style="border-radius: 12px; background-color: transparent; border: 1px solid #ef4444;">
+                          <a href="${declineLink}" style="font-size: 16px; font-weight: 700; color: #ef4444; text-decoration: none; padding: 14px 28px; border-radius: 12px; display: inline-block;">Decline</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
       `,
     };
 

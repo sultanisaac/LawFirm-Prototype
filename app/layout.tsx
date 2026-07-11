@@ -6,7 +6,7 @@ import { BookingProvider } from '@/context/BookingContext';
 import { PrototypeBanner } from '@/components/PrototypeBanner';
 import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
 import { BookingModal } from '@/components/booking/BookingModal';
-import Script from 'next/script';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,10 +33,6 @@ export default function RootLayout({
             <BookingModal />
             {children}
             <FloatingWhatsApp />
-            <Script
-              src="https://assets.calendly.com/assets/external/widget.js"
-              strategy="afterInteractive"
-            />
           </BookingProvider>
         </LanguageProvider>
       </body>

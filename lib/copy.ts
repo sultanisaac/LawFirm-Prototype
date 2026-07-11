@@ -127,14 +127,14 @@ const en: CopyShape = {
     cta_email: "Email Us",
   },
   hero: {
-    badge: "Corporate & Commercial Law · Jakarta",
-    headline: "Business-First\nLegal Counsel",
+    badge: "Protect. Scale. Succeed.",
+    headline: "Legal Clarity for\nFearless Founders",
     subheadline:
-      "Fast, clear, and practical legal solutions for SMEs, startups, and investors in Indonesia. No legal jargon — just results.",
+      "You built your business to grow, not to get bogged down in legal red tape. We give you the strategic armor you need to close deals and scale safely in Indonesia—without the confusing lawyer speak.",
     bullets: [
-      "Contracts drafted & reviewed within 48 hours",
-      "Fixed-fee options — no surprise invoices",
-      "Confidential & NDA-ready consultations",
+      "Bulletproof contracts that actually make sense",
+      "No surprise bills. Total transparency.",
+      "We move at startup speed.",
     ],
     cta_wa: "Start WhatsApp Consultation",
     cta_email: "Send Email Inquiry",
@@ -397,14 +397,14 @@ const id: CopyShape = {
     cta_email: "Email Kami",
   },
   hero: {
-    badge: "Hukum Korporasi & Komersial · Jakarta",
-    headline: "Pendampingan Hukum\nBisnis yang Praktis",
+    badge: "Lindungi. Berkembang. Sukses.",
+    headline: "Kejelasan Hukum untuk\nPendiri Bisnis",
     subheadline:
-      "Solusi hukum bisnis yang cepat, jelas, dan praktis untuk UMKM, startup, dan investor di Indonesia. Tanpa jargon hukum — hanya hasil nyata.",
+      "Anda membangun bisnis untuk berkembang, bukan untuk terjebak dalam birokrasi. Kami memberikan perlindungan strategis agar Anda bisa berekspansi dengan aman di Indonesia—tanpa bahasa hukum yang membingungkan.",
     bullets: [
-      "Kontrak disusun & ditinjau dalam 48 jam",
-      "Opsi biaya tetap — tanpa tagihan mengejutkan",
-      "Konsultasi rahasia & siap dengan NDA",
+      "Kontrak solid yang mudah dipahami",
+      "Transparansi total. Tanpa tagihan mendadak.",
+      "Kami bergerak secepat bisnis Anda.",
     ],
     cta_wa: "Mulai Konsultasi WhatsApp",
     cta_email: "Kirim Pertanyaan via Email",

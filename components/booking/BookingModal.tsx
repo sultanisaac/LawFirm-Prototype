@@ -17,8 +17,8 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
-// Calendly topics must match exactly what's configured in the Calendly dashboard
-const CALENDLY_TOPICS = [
+// Booking topics
+const BOOKING_TOPICS = [
   "Contracts & Legal Drafting",
   "Company Establishment",
   "Employment & HR",
@@ -167,7 +167,7 @@ export function BookingModal() {
                 </p>
               </div>
 
-              {/* Legal Topic — matches Calendly dropdown exactly */}
+              {/* Legal Topic */}
               <div className="space-y-2">
                 <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
                   Legal Topic <span className="text-amber-500">*</span>
@@ -177,7 +177,7 @@ export function BookingModal() {
                     <SelectValue placeholder="Select a topic..." />
                   </SelectTrigger>
                   <SelectContent className="bg-[#10141e] border-white/10 rounded-xl shadow-2xl">
-                    {CALENDLY_TOPICS.map((topic) => (
+                    {BOOKING_TOPICS.map((topic) => (
                       <SelectItem
                         key={topic}
                         value={topic}
