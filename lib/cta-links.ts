@@ -1,7 +1,7 @@
 import { Lang } from "./copy";
 
-export const WA_NUMBER = "6281200000000";
-export const EMAIL_ADDRESS = "hello@nusaleza-law.id";
+export const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6281200000000";
+export const EMAIL_ADDRESS = process.env.NEXT_PUBLIC_EMAIL_ADDRESS || "hello@nusaleza-law.id";
 
 export function buildWhatsAppLink(topic: string, lang: Lang): string {
   const message =
