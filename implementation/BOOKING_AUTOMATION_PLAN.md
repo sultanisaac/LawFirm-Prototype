@@ -60,12 +60,12 @@ If a booking is already confirmed but an emergency requires the business to canc
   - [x] Approval email sent to business owner with booking details
   - [x] "Magic Button" Confirm API route implemented (`app/api/booking/confirm/route.ts`)
   - [x] "Magic Button" Decline API route implemented (`app/api/booking/decline/route.ts`)
-- [ ] **Phase 3: Automated Resolution**
-  - [ ] Google Calendar event creation via Next.js API
-  - [ ] Client added as "Guest" to event
-  - [ ] Google Calendar automatic invite
-  - [ ] Client phone number/details saved in event description
-  - [ ] Trigger polite cancellation email to client via Resend if declined
-- [ ] **Phase 4: Emergency Cancellations (Post-Confirmation)**
-  - [ ] Manual or Automated process handling
+- [x] **Phase 3: Automated Resolution**
+  - [x] Google Calendar event creation via Next.js API
+  - [x] Client added as "Guest" to event
+  - [x] Google Calendar automatic invite
+  - [x] Client phone number/details saved in event description
+  - [x] Trigger polite cancellation email to client via Resend if declined
+- [x] **Phase 4: Emergency Cancellations (Post-Confirmation)**
+  - [x] Manual or Automated process handling
 

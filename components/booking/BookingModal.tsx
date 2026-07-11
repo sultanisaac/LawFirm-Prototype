@@ -6,7 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ShieldCheck, ArrowRight, User, Mail, Calendar, ChevronLeft, X } from "lucide-react";
+import { ShieldCheck, ArrowRight, User, Mail, Phone, Calendar, ChevronLeft, X } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -31,7 +31,7 @@ export function BookingModal() {
   const { isOpen, prefillData, closeBookingModal } = useBooking();
   const { t } = useLanguage();
   const [step, setStep] = useState<1 | 2>(1);
-  const [form, setForm] = useState({ name: "", email: "", topic: "", date: "", time: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", topic: "", date: "", time: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Reset form when modal opens & prefill from context
@@ -41,6 +41,7 @@ export function BookingModal() {
       setForm({
         name: prefillData?.name || "",
         email: prefillData?.email || "",
+        phone: "",
         topic: prefillData?.topic || "",
         date: "",
         time: "",
@@ -71,7 +72,7 @@ export function BookingModal() {
     }
   };
 
-  const isValid = form.name.trim().length >= 2 && form.email.includes("@") && form.topic.length > 0;
+  const isValid = form.name.trim().length >= 2 && form.email.includes("@") && form.phone.trim().length >= 8 && form.topic.length > 0;
 
   if (!isOpen) return null;
 
@@ -164,6 +165,24 @@ export function BookingModal() {
                 <p className="text-[10px] text-white/30 leading-relaxed">
                   Booking confirmation will be sent here.
                 </p>
+              </div>
+
+              {/* Phone */}
+              <div className="space-y-2">
+                <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
+                  WhatsApp Number <span className="text-amber-500">*</span>
+                </Label>
+                <div className="relative">
+                  <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+                  <Input
+                    value={form.phone}
+                    onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                    type="tel"
+                    placeholder="+62 812 3456 7890"
+                    className="pl-10 h-12 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
+                    autoComplete="tel"
+                  />
+                </div>
               </div>
 
               {/* Legal Topic */}

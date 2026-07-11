@@ -30,7 +30,7 @@ export function FloatingWhatsApp() {
       )}
     >
       <div className="relative group flex flex-col items-end gap-2">
-        {/* Tooltip bubble — desktop hover */}
+        {/* Tooltip bubble - desktop hover */}
         <div className={cn(
           "hidden md:block absolute bottom-full mb-3 right-0 bg-[#1a1f2e] text-white text-xs font-semibold px-3 py-1.5 rounded-xl border border-white/10 whitespace-nowrap shadow-xl transition-all duration-200",
           tooltip ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1 pointer-events-none"
@@ -40,7 +40,7 @@ export function FloatingWhatsApp() {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Dismiss — only visible on hover/group-hover */}
+          {/* Dismiss - only visible on hover/group-hover */}
           <button
             onClick={() => setIsDismissed(true)}
             className="w-6 h-6 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/40 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity"
@@ -49,7 +49,7 @@ export function FloatingWhatsApp() {
             <X className="h-3 w-3" />
           </button>
 
-          {/* FAB — pill on desktop, circle on mobile */}
+          {/* FAB - pill on desktop, circle on mobile */}
           <a
             href={buildGeneralWhatsAppLink(lang)}
             target="_blank"

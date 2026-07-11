@@ -130,7 +130,7 @@ const en: CopyShape = {
     badge: "Protect. Scale. Succeed.",
     headline: "Legal Clarity for\nFearless Founders",
     subheadline:
-      "You built your business to grow, not to get bogged down in legal red tape. We give you the strategic armor you need to close deals and scale safely in Indonesia—without the confusing lawyer speak.",
+      "You built your business to grow, not to get bogged down in legal red tape. We give you the strategic armor you need to close deals and scale safely in Indonesia without the confusing lawyer speak.",
     bullets: [
       "Bulletproof contracts that actually make sense",
       "No surprise bills. Total transparency.",
@@ -146,7 +146,7 @@ const en: CopyShape = {
   services: {
     title: "Legal Services",
     subtitle:
-      "Practical legal support across the full business lifecycle — from setup to protection to dispute resolution.",
+      "Practical legal support across the full business lifecycle from setup to protection to dispute resolution.",
     tabs: {
       setup: "Business Setup",
       protection: "Protection & Compliance",
@@ -185,7 +185,7 @@ const en: CopyShape = {
       {
         id: "ip",
         tab: "protection",
-        title: "IP — Trademark, Copyright & Licensing",
+        title: "IP, Trademark, Copyright & Licensing",
         benefit: "Register and protect your brand, content, and IP portfolio.",
         topic: "Intellectual Property",
       },
@@ -199,7 +199,7 @@ const en: CopyShape = {
       {
         id: "retainer",
         tab: "protection",
-        title: "Monthly Retainer — General Counsel",
+        title: "Monthly Retainer, General Counsel",
         benefit: "On-call legal support without the cost of in-house counsel.",
         topic: "Monthly Retainer",
       },
@@ -241,7 +241,7 @@ const en: CopyShape = {
       {
         number: "02",
         title: "Scope & Fee Estimate",
-        desc: "We outline what's involved, the timeline, and a clear fee — fixed or hourly. You decide whether to proceed. No obligation.",
+        desc: "We outline what's involved, the timeline, and a clear fee, fixed or hourly. You decide whether to proceed. No obligation.",
       },
       {
         number: "03",
@@ -259,7 +259,7 @@ const en: CopyShape = {
     items: [
       {
         q: "What is the consultation fee for the first call?",
-        a: "The first 15-minute call is complimentary to understand your situation and whether we can help. If we proceed, we agree on fees upfront — fixed or hourly. No surprises, no obligation.",
+        a: "The first 15-minute call is complimentary to understand your situation and whether we can help. If we proceed, we agree on fees upfront, fixed or hourly. No surprises, no obligation.",
       },
       {
         q: "Do you offer fixed-fee or hourly billing?",
@@ -271,11 +271,11 @@ const en: CopyShape = {
       },
       {
         q: "Can you sign an NDA before we discuss our matter?",
-        a: "Yes. A mutual NDA can be signed before any substantive discussion. We take confidentiality seriously — attorney-client privilege applies from your very first communication with us.",
+        a: "Yes. A mutual NDA can be signed before any substantive discussion. We take confidentiality seriously. Attorney-client privilege applies from your very first communication with us.",
       },
       {
         q: "What documents should I prepare for the first consultation?",
-        a: "Bring whatever you have — a contract draft, company documents, a dispute timeline, or just a clear description of your issue. You don't need to be fully prepared. We'll help you structure it.",
+        a: "Bring whatever you have: a contract draft, company documents, a dispute timeline, or just a clear description of your issue. You don't need to be fully prepared. We'll help you structure it.",
       },
       {
         q: "What is included and excluded in your fees?",
@@ -333,7 +333,7 @@ const en: CopyShape = {
     err_message: "Please describe your issue (min. 10 characters)",
   },
   footer: {
-    tagline: "Business-first legal counsel — fast, clear, and practical.",
+    tagline: "Business-first legal counsel, fast, clear, and practical.",
     office: "Jakarta, Indonesia (Prototype)",
     privacy_link: "Privacy Policy",
     wa_label: "WhatsApp",
@@ -381,7 +381,7 @@ const en: CopyShape = {
   },
   booking: {
     title: "Book a Strategic Session",
-    subtitle: "Select a date and time that works best for you. No initial fee, no pressure — just clear legal pathfinding.",
+    subtitle: "Select a date and time that works best for you. No initial fee, no pressure, just clear legal pathfinding.",
     badge: "Scheduling",
   },
 };
@@ -400,7 +400,7 @@ const id: CopyShape = {
     badge: "Lindungi. Berkembang. Sukses.",
     headline: "Kejelasan Hukum untuk\nPendiri Bisnis",
     subheadline:
-      "Anda membangun bisnis untuk berkembang, bukan untuk terjebak dalam birokrasi. Kami memberikan perlindungan strategis agar Anda bisa berekspansi dengan aman di Indonesia—tanpa bahasa hukum yang membingungkan.",
+      "Anda membangun bisnis untuk berkembang, bukan untuk terjebak dalam birokrasi. Kami memberikan perlindungan strategis agar Anda bisa berekspansi dengan aman di Indonesia tanpa bahasa hukum yang membingungkan.",
     bullets: [
       "Kontrak solid yang mudah dipahami",
       "Transparansi total. Tanpa tagihan mendadak.",
@@ -416,7 +416,7 @@ const id: CopyShape = {
   services: {
     title: "Layanan Hukum",
     subtitle:
-      "Dukungan hukum praktis sepanjang siklus bisnis — dari pendirian hingga perlindungan hingga penyelesaian sengketa.",
+      "Dukungan hukum praktis sepanjang siklus bisnis dari pendirian hingga perlindungan hingga penyelesaian sengketa.",
     tabs: {
       setup: "Pendirian Bisnis",
       protection: "Perlindungan & Kepatuhan",
@@ -455,7 +455,7 @@ const id: CopyShape = {
       {
         id: "ip",
         tab: "protection",
-        title: "KI — Merek, Hak Cipta & Lisensi",
+        title: "KI, Merek, Hak Cipta & Lisensi",
         benefit: "Daftarkan dan lindungi merek, konten, dan portofolio KI Anda.",
         topic: "Kekayaan Intelektual",
       },
@@ -469,7 +469,7 @@ const id: CopyShape = {
       {
         id: "retainer",
         tab: "protection",
-        title: "Retainer Bulanan — Kuasa Hukum Umum",
+        title: "Retainer Bulanan, Kuasa Hukum Umum",
         benefit: "Dukungan hukum siap pakai tanpa biaya konsultan internal.",
         topic: "Retainer Bulanan",
       },
@@ -511,7 +511,7 @@ const id: CopyShape = {
       {
         number: "02",
         title: "Ruang Lingkup & Estimasi Biaya",
-        desc: "Kami uraikan apa yang diperlukan, timeline, dan biaya yang jelas — tetap atau per jam. Anda memutuskan untuk melanjutkan. Tanpa kewajiban.",
+        desc: "Kami uraikan apa yang diperlukan, timeline, dan biaya yang jelas, tetap atau per jam. Anda memutuskan untuk melanjutkan. Tanpa kewajiban.",
       },
       {
         number: "03",
@@ -530,7 +530,7 @@ const id: CopyShape = {
     items: [
       {
         q: "Berapa biaya konsultasi untuk panggilan pertama?",
-        a: "15 menit pertama gratis untuk memahami situasi Anda dan apakah kami dapat membantu. Jika dilanjutkan, kami sepakati biaya di awal — tetap atau per jam. Tanpa kejutan, tanpa kewajiban.",
+        a: "15 menit pertama gratis untuk memahami situasi Anda dan apakah kami dapat membantu. Jika dilanjutkan, kami sepakati biaya di awal, tetap atau per jam. Tanpa kejutan, tanpa kewajiban.",
       },
       {
         q: "Apakah Anda menawarkan biaya tetap atau per jam?",
@@ -542,11 +542,11 @@ const id: CopyShape = {
       },
       {
         q: "Bisakah Anda menandatangani NDA sebelum kami berdiskusi?",
-        a: "Ya. NDA timbal balik dapat ditandatangani sebelum diskusi substantif apa pun. Kami sangat menjaga kerahasiaan — privilese advokat-klien berlaku sejak komunikasi pertama Anda dengan kami.",
+        a: "Ya. NDA timbal balik dapat ditandatangani sebelum diskusi substantif apa pun. Kami sangat menjaga kerahasiaan. Privilese advokat-klien berlaku sejak komunikasi pertama Anda dengan kami.",
       },
       {
         q: "Dokumen apa yang harus saya siapkan untuk konsultasi pertama?",
-        a: "Bawa apa yang Anda miliki — draf kontrak, dokumen perusahaan, kronologi sengketa, atau hanya deskripsi jelas masalah Anda. Tidak perlu sepenuhnya siap. Kami bantu strukturisasinya.",
+        a: "Bawa apa yang Anda miliki: draf kontrak, dokumen perusahaan, kronologi sengketa, atau hanya deskripsi jelas masalah Anda. Tidak perlu sepenuhnya siap. Kami bantu strukturisasinya.",
       },
       {
         q: "Apa yang termasuk dan tidak termasuk dalam biaya Anda?",
@@ -652,7 +652,7 @@ const id: CopyShape = {
   },
   booking: {
     title: "Jadwalkan Sesi Strategis",
-    subtitle: "Pilih tanggal dan waktu yang paling sesuai untuk Anda. Tanpa biaya awal, tanpa tekanan — hanya panduan hukum yang jelas.",
+    subtitle: "Pilih tanggal dan waktu yang paling sesuai untuk Anda. Tanpa biaya awal, tanpa tekanan, hanya panduan hukum yang jelas.",
     badge: "Penjadwalan",
   },
 };

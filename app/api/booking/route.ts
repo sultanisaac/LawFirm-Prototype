@@ -5,10 +5,10 @@ import jwt from 'jsonwebtoken';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, topic, date, time } = body;
+    const { name, email, phone, topic, date, time } = body;
 
     // Create a payload for the JWT
-    const payload = { name, email, topic, date, time };
+    const payload = { name, email, phone, topic, date, time };
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'secret123', { expiresIn: '7d' });
 
     // Base URL of the app
@@ -41,6 +41,7 @@ export async function POST(req: Request) {
                     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom: 32px;">
                       <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">Name:</strong> <span style="color: #a0aab2;">${name}</span></td></tr>
                       <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">Email:</strong> <span style="color: #a0aab2;">${email}</span></td></tr>
+                      <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">WhatsApp:</strong> <span style="color: #a0aab2;"><a href="https://wa.me/${phone?.replace(/[^0-9]/g, '')}" style="color: #dfa129; text-decoration: none;">${phone}</a></span></td></tr>
                       <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">Topic:</strong> <span style="color: #a0aab2;">${topic}</span></td></tr>
                       <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">Date:</strong> <span style="color: #a0aab2;">${date}</span></td></tr>
                       <tr><td style="padding-bottom: 12px;"><strong style="color: #ffffff;">Time:</strong> <span style="color: #a0aab2;">${time}</span></td></tr>

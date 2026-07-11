@@ -31,8 +31,8 @@ export function buildWhatsAppLinkFromForm(data: FormData, lang: Lang): string {
 export function buildEmailLinkFromForm(data: FormData, lang: Lang): string {
   const subject =
     lang === "en"
-      ? `Legal Inquiry — ${data.topic}`
-      : `Konsultasi Hukum — ${data.topic}`;
+      ? `Legal Inquiry: ${data.topic}`
+      : `Konsultasi Hukum: ${data.topic}`;
   const body =
     lang === "en"
       ? `Name: ${data.name}\nWhatsApp: ${data.whatsapp}\nCompany: ${data.company || "N/A"}\nTopic: ${data.topic}\nUrgency: ${data.urgency}\n\nIssue Summary:\n${data.message}`
@@ -42,7 +42,7 @@ export function buildEmailLinkFromForm(data: FormData, lang: Lang): string {
 
 export function buildEmailLink(topic: string, lang: Lang): string {
   const subject =
-    lang === "en" ? `Legal Inquiry — ${topic}` : `Konsultasi Hukum — ${topic}`;
+    lang === "en" ? `Legal Inquiry: ${topic}` : `Konsultasi Hukum: ${topic}`;
   const body =
     lang === "en"
       ? `Hi NUSALEXA,\n\nI would like to inquire about: ${topic}.\n\nName: \nCompany: \nWhatsApp: \nBrief description: `
