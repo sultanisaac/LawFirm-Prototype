@@ -5,10 +5,10 @@ import jwt from 'jsonwebtoken';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, phone, topic, date, time } = body;
+    const { name, company, email, phone, topic, date, time } = body;
 
     // Create a payload for the JWT
-    const payload = { name, email, phone, topic, date, time };
+    const payload = { name, company, email, phone, topic, date, time };
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'secret123', { expiresIn: '7d' });
 
     // Base URL of the app (dynamically detected from the request, falling back to env variable)
@@ -138,6 +138,10 @@ export async function POST(req: Request) {
                                                 <tr class="data-row">
                                                     <td class="data-label" width="30%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; color: #a0aab2; padding-bottom: 12px;">Name:</td>
                                                     <td class="data-value" width="70%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #ffffff; padding-bottom: 12px;">${name}</td>
+                                                </tr>
+                                                <tr class="data-row">
+                                                    <td class="data-label" width="30%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; color: #a0aab2; padding-bottom: 12px;">Company:</td>
+                                                    <td class="data-value" width="70%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #ffffff; padding-bottom: 12px;">${company || 'N/A'}</td>
                                                 </tr>
                                                 <tr class="data-row">
                                                     <td class="data-label" width="30%" valign="top" style="font-family: 'Inter', sans-serif; font-size: 14px; color: #a0aab2; padding-bottom: 12px;">Email:</td>

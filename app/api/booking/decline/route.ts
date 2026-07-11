@@ -143,7 +143,7 @@ export async function GET(req: Request) {
                                             <table role="presentation" cellspacing="0" cellpadding="0" border="0">
                                                 <tr>
                                                     <td style="border-radius: 12px; background-color: #dfa129; text-align: center;">
-                                                        <a href="https://api.whatsapp.com/send/?phone=6281200000000&text=Hi+NUSALEXA%2C+I+need+legal+help+with%3A+${encodeURIComponent(decoded.topic)}.+Name%2FCompany%3A+${encodeURIComponent(decoded.name)}.+Timeline%3A+%5Btoday%2Fthis+week%2Fflexible%5D.&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary" style="display: inline-block; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #422006; text-decoration: none; padding: 14px 32px; border-radius: 12px; border: 1px solid #dfa129;">
+                                                        <a href="https://api.whatsapp.com/send/?phone=6281200000000&text=${encodeURIComponent(\`Hi NUSALEXA, I need legal help with: \${decoded.topic}. Name/Company: \${decoded.name}\${decoded.company ? \` / \${decoded.company}\` : ''}. Timeline: [today/this week/flexible].\`)}&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary" style="display: inline-block; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #422006; text-decoration: none; padding: 14px 32px; border-radius: 12px; border: 1px solid #dfa129;">
                                                             Chat via WhatsApp to Reschedule
                                                         </a>
                                                     </td>
