@@ -18,6 +18,10 @@ export async function GET(req: Request) {
     const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][parseInt(month) - 1];
     const displayDate = `${parseInt(day)} ${monthName} ${year}`;
 
+    const companyText = decoded.company ? ` / ${decoded.company}` : '';
+    const whatsappMessage = `Hi NUSALEXA, I need legal help with: ${decoded.topic}. Name/Company: ${decoded.name}${companyText}. Timeline: [today/this week/flexible].`;
+    const waUrl = `https://api.whatsapp.com/send/?phone=6281200000000&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -148,7 +152,7 @@ export async function GET(req: Request) {
                                             <table role="presentation" cellspacing="0" cellpadding="0" border="0">
                                                 <tr>
                                                     <td style="border-radius: 12px; background-color: #dfa129; text-align: center;">
-                                                        <a href="https://api.whatsapp.com/send/?phone=6281200000000&text=${encodeURIComponent(\`Hi NUSALEXA, I need legal help with: \${decoded.topic}. Name/Company: \${decoded.name}\${decoded.company ? \` / \${decoded.company}\` : ''}. Timeline: [today/this week/flexible].\`)}&type=phone_number&app_absent=0" target="_blank" class="btn btn-primary" style="display: inline-block; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #422006; text-decoration: none; padding: 14px 32px; border-radius: 12px; border: 1px solid #dfa129;">
+                                                        <a href="${waUrl}" target="_blank" class="btn btn-primary" style="display: inline-block; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #422006; text-decoration: none; padding: 14px 32px; border-radius: 12px; border: 1px solid #dfa129;">
                                                             Chat via WhatsApp to Reschedule
                                                         </a>
                                                     </td>
