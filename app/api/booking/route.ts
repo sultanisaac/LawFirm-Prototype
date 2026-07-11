@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER, // sending to the business owner
-      subject: `New Booking Request from ${name}`,
+      subject: `[ACTION REQUIRED] New Consultation Request: ${topic} - ${name}`,
       html: `
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
