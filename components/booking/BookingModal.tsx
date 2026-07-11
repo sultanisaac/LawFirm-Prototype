@@ -37,7 +37,7 @@ const TIME_SLOTS = [
 export function BookingModal() {
   const { isOpen, prefillData, closeBookingModal } = useBooking();
   const { t } = useLanguage();
-  const [step, setStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
   const [form, setForm] = useState({ name: "", email: "", phone: "", topic: "", date: "", time: "" });
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -73,7 +73,7 @@ export function BookingModal() {
       const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
       
       window.open(waUrl, '_blank');
-      closeBookingModal();
+      setStep(3);
     } catch (error) {
       console.error("Booking failed", error);
     } finally {
@@ -108,7 +108,9 @@ export function BookingModal() {
           // Step 1: compact form panel
           step === 1 && "max-h-[92vh] sm:max-w-lg sm:max-h-[90vh]",
           // Step 2: wide calendar panel
-          step === 2 && "sm:max-w-4xl h-[92vh] sm:h-[750px]"
+          step === 2 && "sm:max-w-4xl h-[92vh] sm:h-[750px]",
+          // Step 3: Success panel
+          step === 3 && "max-h-[92vh] sm:max-w-md sm:max-h-[90vh]"
         )}
       >
         {/* ─── STEP 1: Qualification Form ─── */}
@@ -273,7 +275,7 @@ export function BookingModal() {
             <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
               <div className="flex flex-col sm:flex-row gap-8">
                 {/* Calendar */}
-                <div className="space-y-3 flex-1 flex flex-col max-w-[280px] mx-auto sm:mx-0">
+                <div className="space-y-3 flex-1 flex flex-col max-w-[380px] mx-auto sm:mx-0">
                   <Label className="text-[11px] font-black uppercase tracking-widest text-white/50 text-center sm:text-left">
                     Select Date <span className="text-amber-500">*</span>
                   </Label>
@@ -291,19 +293,21 @@ export function BookingModal() {
                       className="text-white bg-transparent pointer-events-auto"
                       captionLayout="dropdown-buttons"
                       fromYear={new Date().getFullYear()}
-                      toYear={new Date().getFullYear() + 2}
+                      toYear={new Date().getFullYear() + 5}
                       classNames={{
                         day_selected: "bg-amber-500 text-amber-950 hover:bg-amber-400 focus:bg-amber-500 focus:text-amber-950 font-bold shadow-[0_0_15px_rgba(215,165,32,0.4)]",
                         day_today: "bg-white/10 text-white",
-                        day: "h-9 w-9 p-0 font-normal hover:bg-white/10 hover:text-white rounded-md transition-all text-sm",
-                        nav_button_previous: "absolute left-1 hover:bg-white/10 hover:text-white rounded-md transition-all",
-                        nav_button_next: "absolute right-1 hover:bg-white/10 hover:text-white rounded-md transition-all",
-                        head_cell: "text-white/50 w-9 font-medium text-[0.8rem] uppercase tracking-wider",
-                        caption: "flex justify-center pt-1 pb-2 relative items-center text-sm font-bold text-white gap-1",
+                        day: "h-11 w-11 p-0 font-normal hover:bg-white/10 hover:text-white rounded-md transition-all text-sm",
+                        cell: "h-11 w-11 text-center p-0 relative",
+                        nav_button_previous: "absolute left-1 w-7 h-7 flex items-center justify-center hover:bg-white/10 hover:text-white rounded-md transition-all",
+                        nav_button_next: "absolute right-1 w-7 h-7 flex items-center justify-center hover:bg-white/10 hover:text-white rounded-md transition-all",
+                        head_cell: "text-white/50 w-11 font-medium text-[0.8rem] uppercase tracking-wider",
+                        caption: "flex justify-center pt-1 pb-2 relative items-center text-sm font-bold text-white gap-1 px-8",
                         caption_label: "hidden", // Hide default label when using dropdowns
-                        dropdown_month: "flex items-center gap-1",
-                        dropdown_year: "flex items-center gap-1",
-                        dropdown: "bg-[#10141e] border border-white/10 text-white text-sm rounded-md px-2 py-1 focus:ring-1 focus:ring-amber-500/50 outline-none cursor-pointer hover:bg-white/5 transition-colors",
+                        caption_dropdowns: "flex flex-row items-center gap-2",
+                        dropdown_month: "flex items-center [&>label]:hidden",
+                        dropdown_year: "flex items-center [&>label]:hidden",
+                        dropdown: "bg-[#10141e] border border-white/10 text-white text-sm rounded-md px-2 py-1 focus:ring-1 focus:ring-amber-500/50 outline-none cursor-pointer hover:bg-white/5 transition-colors [&>option]:bg-[#10141e] [&>option]:text-white [&>option]:py-1",
                       }}
                     />
                   </div>
@@ -347,6 +351,43 @@ export function BookingModal() {
               <p className="text-center text-[10px] text-white/25 mt-3 font-medium">
                 You will be redirected to WhatsApp to confirm with our team.
               </p>
+            </div>
+          </div>
+        )}
+
+        {/* ─── STEP 3: Success ─── */}
+        {step === 3 && (
+          <div className="flex flex-col h-full overflow-hidden items-center justify-center py-12 px-6 text-center">
+            <button
+              onClick={closeBookingModal}
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors text-white/50 hover:text-white"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+              <ShieldCheck className="h-8 w-8 text-emerald-400" />
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-3">Request Successful!</h2>
+            <p className="text-sm text-white/60 mb-8 max-w-sm mx-auto leading-relaxed">
+              We have received your booking details for <strong className="text-white font-medium">{form.topic}</strong> on <strong className="text-white font-medium">{form.date}</strong> at <strong className="text-white font-medium">{form.time}</strong>.
+            </p>
+            <div className="space-y-3 w-full">
+              <Button
+                onClick={() => {
+                  const message = `Hi, I just submitted a booking request for ${form.topic} on ${form.date} at ${form.time}. My email is ${form.email}.`;
+                  window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(message)}`, '_blank');
+                }}
+                className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold rounded-xl transition-all"
+              >
+                Continue to WhatsApp
+              </Button>
+              <Button
+                variant="ghost"
+                onClick={closeBookingModal}
+                className="w-full h-12 text-white/50 hover:text-white hover:bg-white/5 rounded-xl font-medium transition-all"
+              >
+                Close Window
+              </Button>
             </div>
           </div>
         )}

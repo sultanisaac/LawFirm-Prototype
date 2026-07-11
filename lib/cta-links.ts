@@ -52,7 +52,7 @@ export function buildEmailLink(topic: string, lang: Lang): string {
 
 export function buildGeneralWhatsAppLink(lang: Lang): string {
   return buildWhatsAppLink(
-    lang === "en" ? "general legal matter" : "masalah hukum umum",
+    lang === "en" ? "[Legal Topic]" : "[Topik Hukum]",
     lang
   );
 }
