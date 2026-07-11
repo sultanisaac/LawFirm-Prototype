@@ -44,28 +44,156 @@ export async function GET(req: Request) {
       to: decoded.email,
       subject: `Booking Confirmed: ${decoded.topic}`,
       html: `
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #0b0e14; font-family: 'Inter', Helvetica, Arial, sans-serif; padding: 40px 0;">
-          <tr>
-            <td align="center">
-              <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="background-color: #10141e; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; overflow: hidden;">
-                <tr>
-                  <td style="padding: 40px;">
-                    <h2 style="color: #dfa129; font-size: 24px; font-weight: 800; margin-top: 0; margin-bottom: 24px;">Booking Confirmed</h2>
-                    <p style="color: #ffffff; font-size: 16px; font-weight: 500; margin-bottom: 16px;">Dear ${decoded.name},</p>
-                    <p style="color: #a0aab2; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">Your strategic session for <strong style="color: #ffffff;">${decoded.topic}</strong> on <strong style="color: #ffffff;">${decoded.date}</strong> at <strong style="color: #ffffff;">${decoded.time}</strong> has been officially confirmed.</p>
-                    ${googleMeetLink ? `<p style="color: #a0aab2; font-size: 16px; line-height: 1.6; margin-bottom: 24px;"><strong>Google Meet Link:</strong> <br><a href="${googleMeetLink}" style="color: #dfa129; text-decoration: none;">${googleMeetLink}</a></p>` : ''}
-                    <p style="color: #a0aab2; font-size: 16px; line-height: 1.6; margin-bottom: 32px;">We look forward to speaking with you and providing the clarity your business needs. You should also receive an official Google Calendar invitation shortly.</p>
-                    
-                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 24px;">
-                      <p style="color: #ffffff; font-size: 14px; font-weight: 700; margin-bottom: 4px;">NUSALEXA Law Office</p>
-                      <p style="color: #a0aab2; font-size: 14px; margin: 0;">Designed for Modern Business</p>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Session Confirmed - NUSALEXA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base Reset */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+        body { margin: 0; padding: 0; width: 100% !important; height: 100% !important; background-color: #0b0e14; -webkit-font-smoothing: antialiased; }
+        
+        /* Hover Effects for Web Preview */
+        .btn-primary:hover { background-color: #f0b545 !important; border-color: #f0b545 !important; }
+        .meet-link:hover { color: #f0b545 !important; text-decoration: underline !important; }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 600px) {
+            .email-container { width: 100% !important; max-width: 100% !important; }
+            .content-card { padding: 32px 20px !important; border-radius: 0px !important; border-left: none !important; border-right: none !important; }
+            .header-padding { padding: 30px 20px 20px !important; }
+            
+            /* Expand buttons on mobile */
+            .btn-table, .btn-wrapper { display: block !important; width: 100% !important; }
+            .btn { display: block !important; text-align: center !important; }
+            .meet-box { padding: 20px 16px !important; }
+        }
+    </style>
+</head>
+
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #0b0e14; font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+    <center style="width: 100%; background-color: #0b0e14;">
+        
+        <!-- Visually Hidden Preheader Text -->
+        <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+            Your strategic session with NUSALEXA is confirmed. Please find your Google Meet link and details inside.
+        </div>
+
+        <!-- Main Email Container -->
+        <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: auto; width: 100%; max-width: 600px;" class="email-container">
+            
+            <tr>
+                <td class="header-padding" style="padding: 40px 0 30px; text-align: center;">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
+                        <tr>
+                            <td style="font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: 2px;">
+                                NUSALEXA <span style="color: #dfa129;">.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; color: #a0aab2; letter-spacing: 3px; padding-top: 4px; text-transform: uppercase;">
+                                Law Office | Dark Performance Lab
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="padding: 0 16px 40px;">
+                    <!-- Content Card Background -->
+                    <table class="content-card" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #10141e; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; border-top: 4px solid #dfa129; padding: 48px 40px;">
+                        
+                        <!-- Body Copy -->
+                        <tr>
+                            <td style="font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: #a0aab2;">
+                                <p style="margin: 0 0 24px; color: #ffffff; font-weight: 600; font-size: 18px;">
+                                    Hello ${decoded.name},
+                                </p>
+                                
+                                <!-- Success Message -->
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 24px;">
+                                    <tr>
+                                        <td style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500; color: #10b981;">
+                                            <span style="font-size: 18px; margin-right: 4px;">✓</span> Your strategic session with NUSALEXA has been officially confirmed.
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <p style="margin: 0 0 32px;">
+                                    We have locked in our calendar to discuss <strong style="color: #ffffff; font-weight: 600;">${decoded.topic}</strong> on <strong style="color: #ffffff; font-weight: 600;">${decoded.date}</strong> at <strong style="color: #ffffff; font-weight: 600;">${decoded.time}</strong>.
+                                </p>
+
+                                ${googleMeetLink ? `<!-- Distinct Highlight Box for Google Meet Link -->
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 32px;">
+                                    <tr>
+                                        <td class="meet-box" style="background-color: rgba(223, 161, 41, 0.05); border: 1px dashed rgba(223, 161, 41, 0.4); border-radius: 12px; padding: 24px; text-align: center;">
+                                            <p style="margin: 0 0 12px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 1px;">
+                                                Google Meet Link
+                                            </p>
+                                            <p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px;">
+                                                <a href="${googleMeetLink}" class="meet-link" target="_blank" style="color: #dfa129; text-decoration: none; font-weight: 600; word-break: break-all;">
+                                                    ${googleMeetLink}
+                                                </a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>` : ''}
+
+                                <p style="margin: 0 0 32px;">
+                                    We look forward to speaking with you and providing the clarity your business needs. You should also receive an official Google Calendar invitation in your inbox shortly.
+                                </p>
+
+                                <p style="margin: 0 0 40px;">
+                                    Best regards,<br>
+                                    <strong style="color: #ffffff; font-weight: 600;">NUSALEXA Law Office</strong>
+                                </p>
+                            </td>
+                        </tr>
+
+                        <!-- Action Button -->
+                        <tr>
+                            <td align="left">
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="btn-table">
+                                    <tr>
+                                        <td class="btn-wrapper">
+                                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                <tr>
+                                                    <td style="border-radius: 12px; background-color: #dfa129; text-align: center;">
+                                                        <a href="https://lawfirm-prototype.vercel.app/" target="_blank" class="btn btn-primary" style="display: inline-block; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: #422006; text-decoration: none; padding: 14px 32px; border-radius: 12px; border: 1px solid #dfa129;">
+                                                            NUSALEXA Law Office
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            
+            <!-- Safe Area Padding Bottom -->
+            <tr><td style="padding-bottom: 40px;"></td></tr>
+            
         </table>
+    </center>
+</body>
+</html>
       `,
     };
 
