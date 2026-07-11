@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
+import { createCalendarEvent } from '@/lib/google-calendar';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -13,8 +14,22 @@ export async function GET(req: Request) {
   try {
     const decoded: any = jwt.verify(token, process.env.JWT_SECRET || 'secret123');
     
-    // In Phase 3, this is where we'd add to Google Calendar.
-    // For now (Phase 2), we just send a confirmation email to the client.
+    // Phase 3: Create Google Calendar Event
+    let googleMeetLink = '';
+    try {
+      const event = await createCalendarEvent({
+        name: decoded.name,
+        email: decoded.email,
+        phone: decoded.phone,
+        topic: decoded.topic,
+        date: decoded.date,
+        time: decoded.time,
+      });
+      googleMeetLink = event.hangoutLink || '';
+    } catch (calendarError) {
+      console.error("Failed to create Google Calendar event:", calendarError);
+      // We log the error but still send the confirmation email so the client isn't left hanging
+    }
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -38,7 +53,8 @@ export async function GET(req: Request) {
                     <h2 style="color: #dfa129; font-size: 24px; font-weight: 800; margin-top: 0; margin-bottom: 24px;">Booking Confirmed</h2>
                     <p style="color: #ffffff; font-size: 16px; font-weight: 500; margin-bottom: 16px;">Dear ${decoded.name},</p>
                     <p style="color: #a0aab2; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">Your strategic session for <strong style="color: #ffffff;">${decoded.topic}</strong> on <strong style="color: #ffffff;">${decoded.date}</strong> at <strong style="color: #ffffff;">${decoded.time}</strong> has been officially confirmed.</p>
-                    <p style="color: #a0aab2; font-size: 16px; line-height: 1.6; margin-bottom: 32px;">We look forward to speaking with you and providing the clarity your business needs.</p>
+                    ${googleMeetLink ? `<p style="color: #a0aab2; font-size: 16px; line-height: 1.6; margin-bottom: 24px;"><strong>Google Meet Link:</strong> <br><a href="${googleMeetLink}" style="color: #dfa129; text-decoration: none;">${googleMeetLink}</a></p>` : ''}
+                    <p style="color: #a0aab2; font-size: 16px; line-height: 1.6; margin-bottom: 32px;">We look forward to speaking with you and providing the clarity your business needs. You should also receive an official Google Calendar invitation shortly.</p>
                     
                     <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 24px;">
                       <p style="color: #ffffff; font-size: 14px; font-weight: 700; margin-bottom: 4px;">NUSALEXA Law Office</p>
