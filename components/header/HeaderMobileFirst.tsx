@@ -22,9 +22,10 @@ export function HeaderMobileFirst() {
   const [activeSection, setActiveSection] = useState("");
 
   const navItems = [
+    { label: "Home", href: "#hero" },
     { label: t.nav.services, href: "#services" },
     { label: t.nav.faq, href: "#faq" },
-    { label: t.nav.contact, href: "#contact" },
+    { label: t.nav.contact, href: "#footer" },
   ];
 
   useEffect(() => {
@@ -36,10 +37,10 @@ export function HeaderMobileFirst() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.2 }
     );
 
-    const sections = ["services", "faq", "contact"];
+    const sections = ["hero", "services", "faq", "footer"];
     sections.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -52,7 +53,7 @@ export function HeaderMobileFirst() {
     <>
       <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur-sm">
         <div className="container-wide flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 group">
+          <Link href="/#hero" className="flex items-center gap-2.5 group">
             <div className="relative">
               <div className="absolute -inset-1.5 rounded-full bg-primary/10 blur-md group-hover:bg-primary/25 transition-all opacity-100" />
               <img src="/lawfirmlogo.png" alt="NUSALEXA" className="h-7 w-auto relative object-contain" />
@@ -73,6 +74,7 @@ export function HeaderMobileFirst() {
                 <a
                   key={item.href}
                   href={item.href}
+                  onClick={() => setActiveSection(item.href)}
                   className={cn(
                     "relative text-sm font-medium transition-all py-1",
                     activeSection === item.href
@@ -142,7 +144,10 @@ export function HeaderMobileFirst() {
                 <a
                   key={item.href}
                   href={item.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setActiveSection(item.href);
+                    setMenuOpen(false);
+                  }}
                   className={cn(
                     "flex items-center justify-between py-4 px-5 rounded-2xl text-lg font-bold transition-all active:scale-[0.98]",
                     activeSection === item.href

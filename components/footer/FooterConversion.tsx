@@ -19,7 +19,7 @@ export function FooterConversion() {
   const { openBookingModal } = useBooking();
 
   return (
-    <footer className="border-t border-border/60 bg-background pt-16 sm:pt-24 pb-12">
+    <footer id="footer" className="border-t border-border/60 bg-background pt-16 sm:pt-24 pb-12">
       <div className="container-wide">
         {/* Pre-footer CTA */}
         <div className="text-center flex flex-col items-center gap-8 mb-20 sm:mb-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -80,10 +80,13 @@ export function FooterConversion() {
                 </span>
               </div>
               <div className="flex items-center gap-4">
-                <a href="#" className="p-2 sm:p-2.5 rounded-xl bg-secondary/80 border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all">
+                <a href="/#hero" className="p-2 sm:p-2.5 rounded-xl bg-secondary/80 border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all">
+                  <MessageCircle className="h-5 w-5" />
+                </a>
+                <a href="/#hero" className="p-2 sm:p-2.5 rounded-xl bg-secondary/80 border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all">
                   <Linkedin className="h-5 w-5" />
                 </a>
-                <a href="#" className="p-2 sm:p-2.5 rounded-xl bg-secondary/80 border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all">
+                <a href="/#hero" className="p-2 sm:p-2.5 rounded-xl bg-secondary/80 border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all">
                   <Instagram className="h-5 w-5" />
                 </a>
               </div>
@@ -107,8 +110,7 @@ export function FooterConversion() {
               {[
                 { label: t.nav.services, href: "#services" },
                 { label: t.nav.faq, href: "#faq" },
-                { label: t.nav.contact, href: "#contact" },
-                { label: "Our Story", href: "#" },
+                { label: t.nav.contact, href: "#footer" },
               ].map((item) => (
                 <a
                   key={item.label}

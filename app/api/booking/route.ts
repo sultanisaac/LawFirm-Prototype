@@ -11,8 +11,9 @@ export async function POST(req: Request) {
     const payload = { name, email, phone, topic, date, time };
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'secret123', { expiresIn: '7d' });
 
-    // Base URL of the app
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    // Base URL of the app (dynamically detected from the request, falling back to env variable)
+    const requestUrl = new URL(req.url);
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || requestUrl.origin;
 
     // Magic links
     const confirmLink = `${appUrl}/api/booking/confirm?token=${token}`;
