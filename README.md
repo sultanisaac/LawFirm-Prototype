@@ -1,101 +1,83 @@
-# 🏛️ NUSALEXA Law Office — Prototype
+# NUSALEXA LAW OFFICE - Law Firm Prototype
 
-[![Next.js](https://img.shields.io/badge/Next.js-13.5-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.3-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Status](https://img.shields.io/badge/Status-Prototype_Active-emerald?style=for-the-badge)](https://github.com/sultanisaac26/LawFirm-Prototype)
+This is the prototype web application for **Nusalexa Law Office**, a modern law firm providing fast, clear, and practical legal counsel tailored for SMEs, startups, and investors in Indonesia.
 
-A high-performance, cinematic digital gateway for **NUSALEXA Law Office**. This prototype showcases a "Business-First" approach to legal counsel in Jakarta, specifically designed for SMEs, startups, and international investors.
+## What is it for?
 
----
+This platform serves as the digital front door for Nusalexa Law Office, featuring:
+- **Strategic Legal Consultation Presentation**: Highlighting the firm's expertise and professional credentials.
+- **Automated Booking Workflow**: A built-in booking system allowing clients to easily schedule appointments.
+- **Multilingual Support**: Integrated language switching for a broader reach.
+- **Direct WhatsApp Integration**: Quick communication channels for immediate legal assistance.
 
-## 💎 The Vision: Business-First Legal Counsel
-In a landscape often bogged down by legal jargon and slow response times, **NUSALEXA** prioritizes speed, clarity, and results. The prototype implements a "Dark Performance Lab" aesthetic — a deep slate and gold palette that communicates authority and modern efficiency.
+## Key Features
 
-### 🌟 Key Pillars
-- **🌐 Intelligent i18n**: A custom dual-language engine (English & Indonesian) built into the React Context, allowing for seamless content switching.
-- **⚡ Performance-Centric UI**: Built with Next.js 13.5 (App Router) and Tailwind CSS, achieving near-instant load times.
-- **📱 Mobile-First Experience**: A responsive architecture that treats mobile users as first-class citizens, featuring optimized navigation and touch-friendly booking flows.
-- **🎨 Premium Aesthetics**: Framer Motion animations, frosted glass effects (Glassmorphism), and a business-focused dark theme.
+- **Premium UI/UX**: Built with Tailwind CSS and Radix UI components, featuring a sleek dark-themed design with animated gradients and cinematic visuals.
+- **Next.js App Router**: Utilizing the latest Next.js 13+ features for optimal performance, routing, and SEO.
+- **Automated Email Notifications**: Utilizes NodeMailer to send premium, branded HTML confirmation emails upon booking.
+- **Google Calendar Integration**: Automatically generates Calendar events and Google Meet links for confirmed bookings.
+- **Secure API Routes**: Built-in JWT-secured endpoints to safely handle booking approvals and confirmations.
+- **Interactive Components**: Includes a floating WhatsApp widget and an integrated booking modal for seamless user experience.
+- **Responsive Design**: Fully optimized for desktop, tablet, and mobile devices.
 
----
+## Environment Variables
 
-## 📅 Premium Booking Workflow
-The core of the prototype is the **Strategic Session Booking Engine**. Unlike standard integrations, this is a custom-built multi-step experience.
+To fully utilize the automated booking and email features, you must configure your environment variables. Create a `.env.local` or `.env` file in the root directory:
 
-### The Handover Flow
-1. **Qualification**: A 2-page modal captures critical data: *Full Name, Email, Legal Area, and Entity Name*.
-2. **Conflict Check**: Initial capture includes objective details for preliminary internal assessment.
-3. **Custom Booking Flow**: Data is seamlessly captured and handled via a custom Next.js API, saving details and coordinating the scheduling for a zero-friction user experience.
+```env
+# Email Configuration (Nodemailer)
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_password
 
----
+# JWT Token Secret for Booking Confirmations
+JWT_SECRET=your_jwt_secret_string
 
-## 🛠️ Tech Stack & Architecture
+# Google Calendar API (Service Account Credentials)
+GOOGLE_CLIENT_EMAIL=your_service_account_email
+GOOGLE_PRIVATE_KEY="your_private_key"
 
-### Core Infrastructure
-- **Framework**: [Next.js 13.5](https://nextjs.org/) (App Router)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) + `tailwindcss-animate`
-- **Components**: [Radix UI](https://www.radix-ui.com/) Primitives & [Shadcn UI](https://ui.shadcn.com/)
-- **Animation**: [Lucide React](https://lucide.dev/) & CSS Transitions
-
-### Logic & State
-- **Form Management**: [React Hook Form](https://react-hook-form.com/)
-- **Schema Validation**: [Zod](https://zod.dev/)
-- **Scheduling**: Next.js API & Custom Google Calendar Integration
-- **Typing**: Strict [TypeScript 5.2](https://www.typescriptlang.org/)
-
----
-
-## 📂 Project Structure
-```text
-├── app/                  # Next.js App Router (Pages, Layouts, Global Styles)
-├── components/           # UI Components
-│   ├── header/           # Mobile-first navigation & Brand headers
-│   ├── sections/         # Feature blocks: Hero, Services, HowItWorks, FAQ
-│   └── ui/               # Base Shadcn/Radix primitives
-├── implementation/       # Feature blueprints (e.g., BOOKING_AUTOMATION_PLAN.md)
-├── lib/                  # i18n Copy (copy.ts) & Utils
-├── types/                # Global TS definitions & API declarations
-├── public/               # Optimized SVGs, Logos, & Static Assets
-└── .env                  # Environment branding & API tokens
+# Supabase (if Database features are utilized)
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
----
+## Getting Started
 
-## 🚀 Getting Started
+First, install the dependencies. You can use npm, yarn, or pnpm:
 
-### 1. Requirements
-- Node.js 18.17+
-- npm / yarn / pnpm
-
-### 2. Installation
 ```bash
-git clone https://github.com/sultanisaac26/LawFirm-Prototype.git
-cd LawFirm-Prototype
 npm install
+# or
+yarn install
+# or
+pnpm install
 ```
 
-### 3. Environment Setup
-Create a `.env` file in the root based on the following template:
-```bash
-NEXT_PUBLIC_BRAND_COLOR=dfa129  # Primary Gold
-NEXT_PUBLIC_BG_COLOR=0b0e14     # Deep Slate
-```
+Then, run the development server:
 
-### 4. Run Development
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🛤️ Roadmap
-- [x] **Phase 1**: High-fidelity UI & i18n Engine (Jakarta/Global focus).
-- [x] **Phase 2**: Custom Email/Google Calendar Booking Automation.
+## Project Structure
 
----
+- `app/`: Contains the Next.js app router pages (e.g., home, privacy) and main layouts.
+- `app/api/`: API routes handling backend logic such as booking submissions and confirmation flows.
+- `components/`: Reusable UI components including sections (`Hero`), widgets (`FloatingWhatsApp`), and UI elements (`Button`, `Tooltip`).
+- `context/`: React context providers for global state management (`LanguageContext`, `BookingContext`).
+- `.env` / `.env.local`: Environment variables configuration files. Ensure these are configured before running the application.
 
-## ⚖️ Disclaimer
-This website is a **prototype for demonstration purposes only**. All names, testimonials, and legal claims are fictional and intended to showcase design and technical functionality. This site does not create a lawyer-client relationship.
+## Technologies Used
 
-© 2024 NUSALEXA Law Office. Designed for Modern Business.
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Language**: TypeScript
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Primitives**: [Radix UI](https://www.radix-ui.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Form Handling**: React Hook Form & Zod
