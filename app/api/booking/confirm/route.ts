@@ -135,7 +135,7 @@ export async function GET(req: Request) {
                                     We have locked in our calendar to discuss <strong style="color: #ffffff; font-weight: 600;">${decoded.topic}</strong> on <strong style="color: #ffffff; font-weight: 600;">${decoded.date}</strong> at <strong style="color: #ffffff; font-weight: 600;">${decoded.time}</strong>.
                                 </p>
 
-                                ${googleMeetLink ? \`<!-- Distinct Highlight Box for Google Meet Link -->
+                                ${googleMeetLink ? `<!-- Distinct Highlight Box for Google Meet Link -->
                                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 32px;">
                                     <tr>
                                         <td class="meet-box" style="background-color: rgba(223, 161, 41, 0.05); border: 1px dashed rgba(223, 161, 41, 0.4); border-radius: 12px; padding: 24px; text-align: center;">
@@ -143,13 +143,13 @@ export async function GET(req: Request) {
                                                 Google Meet Link
                                             </p>
                                             <p style="margin: 0; font-family: 'Inter', sans-serif; font-size: 16px;">
-                                                <a href="\${googleMeetLink}" class="meet-link" target="_blank" style="color: #dfa129; text-decoration: none; font-weight: 600; word-break: break-all;">
-                                                    \${googleMeetLink}
+                                                <a href="${googleMeetLink}" class="meet-link" target="_blank" style="color: #dfa129; text-decoration: none; font-weight: 600; word-break: break-all;">
+                                                    ${googleMeetLink}
                                                 </a>
                                             </p>
                                         </td>
                                     </tr>
-                                </table>\` : ''}
+                                </table>` : ''}
 
                                 <p style="margin: 0 0 32px;">
                                     We look forward to speaking with you and providing the clarity your business needs. You should also receive an official Google Calendar invitation in your inbox shortly.
