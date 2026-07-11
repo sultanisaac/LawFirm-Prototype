@@ -17,7 +17,7 @@ export function Hero() {
   const { openBookingModal } = useBooking();
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-20 lg:pt-36 lg:pb-32">
+    <section id="hero" className="relative overflow-hidden pt-28 pb-20 lg:pt-36 lg:pb-32">
       {/* Background layers */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0b0e14] via-[#10141e] to-[#0b0e14] pointer-events-none" />
       <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-amber-500/[0.06] blur-[120px] pointer-events-none animate-breathe" />

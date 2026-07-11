@@ -6,7 +6,9 @@ import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ShieldCheck, ArrowRight, User, Mail, Phone, Calendar, ChevronLeft, X } from "lucide-react";
+import { ShieldCheck, ArrowRight, User, Mail, Phone, Calendar as CalendarIcon, ChevronLeft, X } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { format, isBefore, startOfToday, isWeekend } from "date-fns";
 import {
   Select,
   SelectContent,
@@ -27,11 +29,17 @@ const BOOKING_TOPICS = [
   "Other",
 ];
 
+const TIME_SLOTS = [
+  "08:00", "09:00", "10:00", "11:00", "12:00",
+  "13:00", "14:00", "15:00", "16:00", "17:00"
+];
+
 export function BookingModal() {
   const { isOpen, prefillData, closeBookingModal } = useBooking();
   const { t } = useLanguage();
   const [step, setStep] = useState<1 | 2>(1);
   const [form, setForm] = useState({ name: "", email: "", phone: "", topic: "", date: "", time: "" });
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Reset form when modal opens & prefill from context
@@ -46,6 +54,7 @@ export function BookingModal() {
         date: "",
         time: "",
       });
+      setSelectedDate(undefined);
       setIsSubmitting(false);
     }
   }, [isOpen, prefillData]);
@@ -112,7 +121,7 @@ export function BookingModal() {
 
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center shrink-0">
-                  <Calendar className="h-4 w-4 text-amber-400" />
+                  <CalendarIcon className="h-4 w-4 text-amber-400" />
                 </div>
                 <div>
                   <h2 className="text-base font-bold text-white leading-tight">Book a Strategic Session</h2>
@@ -224,7 +233,7 @@ export function BookingModal() {
                 disabled={!isValid}
                 className="w-full h-14 bg-amber-500 hover:bg-amber-400 text-amber-950 font-black text-base rounded-xl gap-2.5 shadow-[0_8px_32px_rgba(215,165,32,0.3)] transition-all duration-200 active:scale-[0.98] disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
               >
-                <Calendar className="h-5 w-5" />
+                <CalendarIcon className="h-5 w-5" />
                 Pick a Date & Time
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -261,29 +270,67 @@ export function BookingModal() {
             </div>
 
             {/* Custom inputs */}
-            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-5">
-              <div className="space-y-2">
-                <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
-                  Select Date <span className="text-amber-500">*</span>
-                </Label>
-                <Input
-                  type="date"
-                  value={form.date}
-                  onChange={(e) => setForm(f => ({ ...f, date: e.target.value }))}
-                  className="h-12 bg-white/5 border-white/10 rounded-xl text-white font-medium focus-visible:border-amber-500/60 transition-colors [color-scheme:dark]"
-                />
-              </div>
+            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+              <div className="flex flex-col sm:flex-row gap-8">
+                {/* Calendar */}
+                <div className="space-y-3 flex-1 flex flex-col max-w-[280px] mx-auto sm:mx-0">
+                  <Label className="text-[11px] font-black uppercase tracking-widest text-white/50 text-center sm:text-left">
+                    Select Date <span className="text-amber-500">*</span>
+                  </Label>
+                  <div className="p-3 bg-white/5 border border-white/10 rounded-xl flex justify-center">
+                    <Calendar
+                      mode="single"
+                      selected={selectedDate}
+                      onSelect={(date) => {
+                        setSelectedDate(date);
+                        if (date) {
+                          setForm(f => ({ ...f, date: format(date, 'yyyy-MM-dd') }));
+                        }
+                      }}
+                      disabled={(date) => isBefore(date, startOfToday()) || isWeekend(date)}
+                      className="text-white bg-transparent pointer-events-auto"
+                      captionLayout="dropdown-buttons"
+                      fromYear={new Date().getFullYear()}
+                      toYear={new Date().getFullYear() + 2}
+                      classNames={{
+                        day_selected: "bg-amber-500 text-amber-950 hover:bg-amber-400 focus:bg-amber-500 focus:text-amber-950 font-bold shadow-[0_0_15px_rgba(215,165,32,0.4)]",
+                        day_today: "bg-white/10 text-white",
+                        day: "h-9 w-9 p-0 font-normal hover:bg-white/10 hover:text-white rounded-md transition-all text-sm",
+                        nav_button_previous: "absolute left-1 hover:bg-white/10 hover:text-white rounded-md transition-all",
+                        nav_button_next: "absolute right-1 hover:bg-white/10 hover:text-white rounded-md transition-all",
+                        head_cell: "text-white/50 w-9 font-medium text-[0.8rem] uppercase tracking-wider",
+                        caption: "flex justify-center pt-1 pb-2 relative items-center text-sm font-bold text-white gap-1",
+                        caption_label: "hidden", // Hide default label when using dropdowns
+                        dropdown_month: "flex items-center gap-1",
+                        dropdown_year: "flex items-center gap-1",
+                        dropdown: "bg-[#10141e] border border-white/10 text-white text-sm rounded-md px-2 py-1 focus:ring-1 focus:ring-amber-500/50 outline-none cursor-pointer hover:bg-white/5 transition-colors",
+                      }}
+                    />
+                  </div>
+                </div>
 
-              <div className="space-y-2">
-                <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
-                  Select Time <span className="text-amber-500">*</span>
-                </Label>
-                <Input
-                  type="time"
-                  value={form.time}
-                  onChange={(e) => setForm(f => ({ ...f, time: e.target.value }))}
-                  className="h-12 bg-white/5 border-white/10 rounded-xl text-white font-medium focus-visible:border-amber-500/60 transition-colors [color-scheme:dark]"
-                />
+                {/* Time Slots */}
+                <div className="space-y-3 flex-1 flex flex-col">
+                  <Label className="text-[11px] font-black uppercase tracking-widest text-white/50 text-center sm:text-left">
+                    Select Time <span className="text-amber-500">*</span>
+                  </Label>
+                  <div className="grid grid-cols-3 gap-2 sm:overflow-y-auto sm:max-h-[350px] p-1 custom-scrollbar pb-10 sm:pb-1">
+                    {TIME_SLOTS.map((time) => (
+                      <button
+                        key={time}
+                        onClick={() => setForm(f => ({ ...f, time }))}
+                        className={cn(
+                          "py-2.5 rounded-lg text-sm font-medium transition-all border",
+                          form.time === time 
+                            ? "bg-amber-500 text-amber-950 border-amber-500 shadow-[0_0_15px_rgba(215,165,32,0.3)]" 
+                            : "bg-white/5 border-white/10 text-white/70 hover:border-amber-500/50 hover:text-white hover:bg-white/10"
+                        )}
+                      >
+                        {time}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
