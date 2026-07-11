@@ -13,6 +13,11 @@ export async function GET(req: Request) {
   try {
     const decoded: any = jwt.verify(token, process.env.JWT_SECRET || 'secret123');
 
+    // Format date for display
+    const [year, month, day] = decoded.date.split('-');
+    const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][parseInt(month) - 1];
+    const displayDate = `${parseInt(day)} ${monthName} ${year}`;
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -113,7 +118,7 @@ export async function GET(req: Request) {
                                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 24px;">
                                     <tr>
                                         <td style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-left: 3px solid #dfa129; border-radius: 8px; padding: 20px; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; color: #a0aab2;">
-                                            We are currently unable to accommodate your requested session on <strong style="color: #ffffff; font-weight: 600;">${decoded.date}</strong> at <strong style="color: #ffffff; font-weight: 600;">${decoded.time}</strong> due to a scheduling conflict.
+                                            We are currently unable to accommodate your requested session on <strong style="color: #ffffff; font-weight: 600;">${displayDate}</strong> at <strong style="color: #ffffff; font-weight: 600;">${decoded.time}</strong> due to a scheduling conflict.
                                         </td>
                                     </tr>
                                 </table>

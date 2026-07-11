@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ShieldCheck, ArrowRight, User, Mail, Phone, Calendar as CalendarIcon, ChevronLeft, X, Building2 } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
-import { format, isBefore, startOfToday, isWeekend } from "date-fns";
+import { format, parse, isBefore, startOfToday, isWeekend } from "date-fns";
 import {
   Select,
   SelectContent,
@@ -71,12 +71,13 @@ export function BookingModal() {
 
       // wa.me URL
       const companyText = form.company ? ` / ${form.company}` : '';
+      const displayDate = form.date ? format(parse(form.date, 'yyyy-MM-dd', new Date()), 'dd MMMM yyyy') : '';
       const message = `Hi NUSALEXA, I just submitted a booking request.
 Topic: ${form.topic}
 Name/Company: ${form.name}${companyText}
 Email: ${form.email}
 Phone: ${form.phone}
-Timeline: ${form.date} at ${form.time}`;
+Timeline: ${displayDate} at ${form.time}`;
       const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
       
       window.open(waUrl, '_blank');
@@ -398,12 +399,13 @@ Timeline: ${form.date} at ${form.time}`;
               <Button
                 onClick={() => {
                   const companyText = form.company ? ` / ${form.company}` : '';
+                  const displayDate = form.date ? format(parse(form.date, 'yyyy-MM-dd', new Date()), 'dd MMMM yyyy') : '';
                   const message = `Hi NUSALEXA, I just submitted a booking request.
 Topic: ${form.topic}
 Name/Company: ${form.name}${companyText}
 Email: ${form.email}
 Phone: ${form.phone}
-Timeline: ${form.date} at ${form.time}`;
+Timeline: ${displayDate} at ${form.time}`;
                   window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(message)}`, '_blank');
                 }}
                 className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold rounded-xl transition-all"
