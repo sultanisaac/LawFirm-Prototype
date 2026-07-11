@@ -81,7 +81,8 @@ Phone: ${form.phone}
 Timeline: ${displayDate} at ${form.time}`;
       const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
       
-      window.open(waUrl, '_blank');
+      // Auto-redirect removed by user request. They will click the button in Step 3 instead.
+      // window.open(waUrl, '_blank');
       setStep(3);
     } catch (error) {
       console.error("Booking failed", error);
