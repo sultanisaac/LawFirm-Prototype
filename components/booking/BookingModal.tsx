@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ShieldCheck, ArrowRight, User, Mail, Calendar, ChevronLeft, X } from "lucide-react";
-import { ShieldCheck, ArrowRight, User, Mail, Calendar, ChevronLeft, X } from "lucide-react";
 import {
   Select,
   SelectContent,
