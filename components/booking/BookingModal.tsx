@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { WA_NUMBER } from "@/lib/cta-links";
 
 // Booking topics
 const BOOKING_TOPICS = [
@@ -78,7 +79,7 @@ Name/Company: ${form.name}${companyText}
 Email: ${form.email}
 Phone: ${form.phone}
 Timeline: ${displayDate} at ${form.time}`;
-      const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
+      const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
       
       window.open(waUrl, '_blank');
       setStep(3);
@@ -95,7 +96,7 @@ Timeline: ${displayDate} at ${form.time}`;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4"
       aria-modal="true"
       role="dialog"
     >
@@ -110,22 +111,20 @@ Timeline: ${displayDate} at ${form.time}`;
         className={cn(
           "relative z-10 w-full flex flex-col bg-[#0b0e14] border border-amber-500/20",
           "shadow-[0_0_120px_rgba(215,165,32,0.12),0_32px_80px_rgba(0,0,0,0.6)]",
-          "transition-all duration-500 ease-out",
-          // Mobile: full bottom sheet style
-          "rounded-t-3xl sm:rounded-2xl",
+          "transition-all duration-500 ease-out rounded-2xl",
           // Step 1: compact form panel
-          step === 1 && "max-h-[92vh] sm:max-w-lg sm:max-h-[90vh]",
+          step === 1 && "max-h-[95dvh] max-w-lg",
           // Step 2: wide calendar panel
-          step === 2 && "sm:max-w-4xl h-[92vh] sm:h-[750px]",
+          step === 2 && "max-h-[95dvh] max-w-4xl sm:h-[750px]",
           // Step 3: Success panel
-          step === 3 && "max-h-[92vh] sm:max-w-md sm:max-h-[90vh]"
+          step === 3 && "max-h-[95dvh] max-w-md"
         )}
       >
         {/* ─── STEP 1: Qualification Form ─── */}
         {step === 1 && (
           <div className="flex flex-col h-full overflow-hidden">
             {/* Header */}
-            <div className="flex items-center justify-between px-6 pt-6 pb-5 border-b border-white/[0.07] shrink-0">
+            <div className="flex items-center justify-between px-4 sm:px-6 pt-3 pb-2 border-b border-white/[0.07] shrink-0">
               {/* Drag handle (mobile) */}
               <div className="absolute top-3 left-1/2 -translate-x-1/2 w-10 h-1 rounded-full bg-white/20 sm:hidden" />
 
@@ -147,9 +146,9 @@ Timeline: ${displayDate} at ${form.time}`;
             </div>
 
             {/* Form body */}
-            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-5">
+            <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-3 space-y-2.5 sm:space-y-4">
               {/* Name */}
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
                   Full Name <span className="text-amber-500">*</span>
                 </Label>
@@ -159,14 +158,14 @@ Timeline: ${displayDate} at ${form.time}`;
                     value={form.name}
                     onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                     placeholder="Your full name"
-                    className="pl-10 h-12 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
+                    className="pl-10 h-10 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
                     autoComplete="name"
                   />
                 </div>
               </div>
 
               {/* Company */}
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
                   Company Name <span className="text-white/30 capitalize tracking-normal font-medium">(Optional)</span>
                 </Label>
@@ -176,13 +175,13 @@ Timeline: ${displayDate} at ${form.time}`;
                     value={form.company}
                     onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))}
                     placeholder="Your company name"
-                    className="pl-10 h-12 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
+                    className="pl-10 h-10 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
                   />
                 </div>
               </div>
 
               {/* Email */}
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
                   Email Address <span className="text-amber-500">*</span>
                 </Label>
@@ -193,17 +192,14 @@ Timeline: ${displayDate} at ${form.time}`;
                     onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                     type="email"
                     placeholder="name@company.com"
-                    className="pl-10 h-12 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
+                    className="pl-10 h-10 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
                     autoComplete="email"
                   />
                 </div>
-                <p className="text-[10px] text-white/30 leading-relaxed">
-                  Booking confirmation will be sent here.
-                </p>
               </div>
 
               {/* Phone */}
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
                   WhatsApp Number <span className="text-amber-500">*</span>
                 </Label>
@@ -214,19 +210,19 @@ Timeline: ${displayDate} at ${form.time}`;
                     onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
                     type="tel"
                     placeholder="+62 812 3456 7890"
-                    className="pl-10 h-12 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
+                    className="pl-10 h-10 bg-white/5 border-white/10 rounded-xl text-white placeholder:text-white/25 font-medium focus-visible:border-amber-500/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors"
                     autoComplete="tel"
                   />
                 </div>
               </div>
 
               {/* Legal Topic */}
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label className="text-[11px] font-black uppercase tracking-widest text-white/50">
                   Legal Topic <span className="text-amber-500">*</span>
                 </Label>
                 <Select value={form.topic} onValueChange={(val) => setForm((f) => ({ ...f, topic: val }))}>
-                  <SelectTrigger className="h-12 bg-white/5 border-white/10 rounded-xl text-white font-medium focus:ring-0 focus:ring-offset-0 data-[placeholder]:text-white/25 focus:border-amber-500/60 transition-colors [&>span]:truncate">
+                  <SelectTrigger className="h-10 bg-white/5 border-white/10 rounded-xl text-white font-medium focus:ring-0 focus:ring-offset-0 data-[placeholder]:text-white/25 focus:border-amber-500/60 transition-colors [&>span]:truncate">
                     <SelectValue placeholder="Select a topic..." />
                   </SelectTrigger>
                   <SelectContent className="bg-[#10141e] border-white/10 rounded-xl shadow-2xl">
@@ -244,7 +240,7 @@ Timeline: ${displayDate} at ${form.time}`;
               </div>
 
               {/* Trust indicators */}
-              <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-emerald-500/5 border border-emerald-500/15">
+              <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-emerald-500/5 border border-emerald-500/15">
                 <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                 <p className="text-[11px] text-emerald-400/80 leading-relaxed font-medium">
                   Attorney–client privilege applies. All details are strictly confidential.
@@ -253,11 +249,11 @@ Timeline: ${displayDate} at ${form.time}`;
             </div>
 
             {/* CTA Footer */}
-            <div className="px-6 pb-6 pt-4 border-t border-white/[0.07] shrink-0">
+            <div className="px-4 sm:px-6 pb-3 pt-2.5 border-t border-white/[0.07] shrink-0">
               <Button
                 onClick={() => setStep(2)}
                 disabled={!isValid}
-                className="w-full h-14 bg-amber-500 hover:bg-amber-400 text-amber-950 font-black text-base rounded-xl gap-2.5 shadow-[0_8px_32px_rgba(215,165,32,0.3)] transition-all duration-200 active:scale-[0.98] disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
+                className="w-full h-11 bg-amber-500 hover:bg-amber-400 text-amber-950 font-black text-base rounded-xl gap-2.5 shadow-[0_8px_32px_rgba(215,165,32,0.3)] transition-all duration-200 active:scale-[0.98] disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
               >
                 <CalendarIcon className="h-5 w-5" />
                 Pick a Date & Time
@@ -274,7 +270,7 @@ Timeline: ${displayDate} at ${form.time}`;
         {step === 2 && (
           <div className="flex flex-col h-full overflow-hidden">
             {/* Back bar */}
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-white/[0.07] shrink-0">
+            <div className="flex items-center gap-3 px-4 sm:px-6 py-3 border-b border-white/[0.07] shrink-0">
               <button
                 onClick={() => setStep(1)}
                 className="flex items-center gap-1.5 text-sm font-semibold text-white/50 hover:text-white transition-colors"
@@ -296,14 +292,14 @@ Timeline: ${displayDate} at ${form.time}`;
             </div>
 
             {/* Custom inputs */}
-            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
-              <div className="flex flex-col sm:flex-row gap-8">
+            <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-6">
+              <div className="flex flex-col sm:flex-row gap-6 sm:gap-8">
                 {/* Calendar */}
-                <div className="space-y-3 flex-1 flex flex-col max-w-[380px] mx-auto sm:mx-0">
+                <div className="space-y-3 flex-1 flex flex-col w-full sm:max-w-[380px] mx-auto sm:mx-0">
                   <Label className="text-[11px] font-black uppercase tracking-widest text-white/50 text-center sm:text-left">
                     Select Date <span className="text-amber-500">*</span>
                   </Label>
-                  <div className="p-3 bg-white/5 border border-white/10 rounded-xl flex justify-center">
+                  <div className="p-2 sm:p-3 bg-white/5 border border-white/10 rounded-xl flex justify-center w-full">
                     <Calendar
                       mode="single"
                       selected={selectedDate}
@@ -321,17 +317,17 @@ Timeline: ${displayDate} at ${form.time}`;
                       classNames={{
                         day_selected: "bg-amber-500 text-amber-950 hover:bg-amber-400 focus:bg-amber-500 focus:text-amber-950 font-bold shadow-[0_0_15px_rgba(215,165,32,0.4)]",
                         day_today: "bg-white/10 text-white",
-                        day: "h-11 w-11 p-0 font-normal hover:bg-white/10 hover:text-white rounded-md transition-all text-sm",
-                        cell: "h-11 w-11 text-center p-0 relative",
-                        nav_button_previous: "absolute left-1 w-7 h-7 flex items-center justify-center hover:bg-white/10 hover:text-white rounded-md transition-all",
-                        nav_button_next: "absolute right-1 w-7 h-7 flex items-center justify-center hover:bg-white/10 hover:text-white rounded-md transition-all",
-                        head_cell: "text-white/50 w-11 font-medium text-[0.8rem] uppercase tracking-wider",
+                        day: "h-9 w-9 sm:h-11 sm:w-11 p-0 font-normal hover:bg-white/10 hover:text-white rounded-md transition-all text-xs sm:text-sm",
+                        cell: "h-9 w-9 sm:h-11 sm:w-11 text-center p-0 relative",
+                        nav_button_previous: "absolute left-0 sm:left-1 w-7 h-7 flex items-center justify-center hover:bg-white/10 hover:text-white rounded-md transition-all",
+                        nav_button_next: "absolute right-0 sm:right-1 w-7 h-7 flex items-center justify-center hover:bg-white/10 hover:text-white rounded-md transition-all",
+                        head_cell: "text-white/50 w-9 sm:w-11 font-medium text-[0.7rem] sm:text-[0.8rem] uppercase tracking-wider",
                         caption: "flex justify-center pt-1 pb-2 relative items-center text-sm font-bold text-white gap-1 px-8",
                         caption_label: "hidden", // Hide default label when using dropdowns
-                        caption_dropdowns: "flex flex-row items-center gap-2",
+                        caption_dropdowns: "flex flex-row items-center gap-1 sm:gap-2",
                         dropdown_month: "flex items-center [&>label]:hidden",
                         dropdown_year: "flex items-center [&>label]:hidden",
-                        dropdown: "bg-[#10141e] border border-white/10 text-white text-sm rounded-md px-2 py-1 focus:ring-1 focus:ring-amber-500/50 outline-none cursor-pointer hover:bg-white/5 transition-colors [&>option]:bg-[#10141e] [&>option]:text-white [&>option]:py-1",
+                        dropdown: "bg-[#10141e] border border-white/10 text-white text-xs sm:text-sm rounded-md px-1 sm:px-2 py-1 focus:ring-1 focus:ring-amber-500/50 outline-none cursor-pointer hover:bg-white/5 transition-colors [&>option]:bg-[#10141e] [&>option]:text-white [&>option]:py-1",
                       }}
                     />
                   </div>
@@ -342,7 +338,7 @@ Timeline: ${displayDate} at ${form.time}`;
                   <Label className="text-[11px] font-black uppercase tracking-widest text-white/50 text-center sm:text-left">
                     Select Time <span className="text-amber-500">*</span>
                   </Label>
-                  <div className="grid grid-cols-3 gap-2 sm:overflow-y-auto sm:max-h-[350px] p-1 custom-scrollbar pb-10 sm:pb-1">
+                  <div className="grid grid-cols-3 gap-2 sm:overflow-y-auto sm:max-h-[350px] p-1 custom-scrollbar">
                     {TIME_SLOTS.map((time) => (
                       <button
                         key={time}
@@ -363,11 +359,11 @@ Timeline: ${displayDate} at ${form.time}`;
             </div>
 
             {/* CTA Footer */}
-            <div className="px-6 pb-6 pt-4 border-t border-white/[0.07] shrink-0">
+            <div className="px-4 sm:px-6 pb-4 pt-3 border-t border-white/[0.07] shrink-0">
               <Button
                 disabled={!form.date || !form.time || isSubmitting}
                 onClick={handleSubmit}
-                className="w-full h-14 bg-amber-500 hover:bg-amber-400 text-amber-950 font-black text-base rounded-xl gap-2.5 shadow-[0_8px_32px_rgba(215,165,32,0.3)] transition-all duration-200 active:scale-[0.98] disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
+                className="w-full h-12 bg-amber-500 hover:bg-amber-400 text-amber-950 font-black text-base rounded-xl gap-2.5 shadow-[0_8px_32px_rgba(215,165,32,0.3)] transition-all duration-200 active:scale-[0.98] disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
               >
                 {isSubmitting ? "Submitting..." : "Confirm & Request Booking"}
                 <ArrowRight className="h-4 w-4" />
@@ -406,7 +402,7 @@ Name/Company: ${form.name}${companyText}
 Email: ${form.email}
 Phone: ${form.phone}
 Timeline: ${displayDate} at ${form.time}`;
-                  window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(message)}`, '_blank');
+                  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
                 }}
                 className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold rounded-xl transition-all"
               >

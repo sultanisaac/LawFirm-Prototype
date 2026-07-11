@@ -20,7 +20,8 @@ export async function GET(req: Request) {
 
     const companyText = decoded.company ? ` / ${decoded.company}` : '';
     const whatsappMessage = `Hi NUSALEXA, I need legal help with: ${decoded.topic}. Name/Company: ${decoded.name}${companyText}. Timeline: [today/this week/flexible].`;
-    const waUrl = `https://api.whatsapp.com/send/?phone=6281200000000&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
+    const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6281200000000';
+    const waUrl = `https://api.whatsapp.com/send/?phone=${waNumber}&text=${encodeURIComponent(whatsappMessage)}&type=phone_number&app_absent=0`;
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
