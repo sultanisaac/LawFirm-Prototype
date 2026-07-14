@@ -12,11 +12,7 @@ export function BookingSection() {
   return (
     <section
       id="booking"
-      className="relative py-20 sm:py-28 overflow-hidden border-t border-border/40"
-      style={{
-        background:
-          "linear-gradient(135deg, hsl(38 78% 52% / 0.06) 0%, hsl(225 22% 6%) 40%, hsl(225 22% 6%) 60%, hsl(38 78% 52% / 0.04) 100%)"
-      }}
+      className="relative py-20 sm:py-28 overflow-hidden border-t border-border/40 bg-background"
     >
       {/* Ambient glows */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[400px] rounded-full bg-amber-500/[0.07] blur-[100px] pointer-events-none" />
@@ -25,7 +21,7 @@ export function BookingSection() {
       <div className="container-wide relative">
         <div className="max-w-4xl mx-auto">
           {/* Card */}
-          <div className="relative rounded-3xl border border-amber-500/20 bg-white/[0.02] backdrop-blur-sm overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5),0_0_60px_hsl(38_78%_52%/0.08)]">
+          <div className="relative rounded-3xl border border-amber-500/20 bg-card/60 backdrop-blur-sm overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5),0_0_60px_hsl(38_78%_52%/0.08)]">
             {/* Top shimmer gradient */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
             {/* Corner accents */}

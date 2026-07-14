@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle, Star, TrendingUp } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/accordion";
 import { useLanguage } from "@/context/LanguageContext";
 import { buildGeneralWhatsAppLink } from "@/lib/cta-links";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 export function FAQ() {
@@ -19,7 +18,7 @@ export function FAQ() {
     {
       title: "Fees & Billing",
       items: [
-        { ...t.faq.items[0], popular: "Popular" },
+        t.faq.items[0],
         t.faq.items[1],
         t.faq.items[5],
         t.faq.items[8]
@@ -28,7 +27,7 @@ export function FAQ() {
     {
       title: "Process & Response",
       items: [
-        { ...t.faq.items[2], popular: "Most Asked" },
+        t.faq.items[2],
         t.faq.items[4],
         t.faq.items[9]
       ]
@@ -77,12 +76,6 @@ export function FAQ() {
                       <AccordionTrigger className="text-base sm:text-lg font-bold text-foreground text-left py-5 hover:no-underline hover:text-primary [&[data-state=open]]:text-primary transition-all group/faq">
                         <div className="flex items-center gap-3">
                           {item.q}
-                          {item.popular && (
-                            <Badge className="bg-amber-500/10 text-amber-500 border-amber-500/20 hover:bg-amber-500/20 text-[9px] uppercase tracking-tighter px-1.5 h-4 font-black">
-                              {item.popular === "Popular" ? <Star className="h-2 w-2 mr-1 fill-amber-500" /> : <TrendingUp className="h-2 w-2 mr-1" />}
-                              {item.popular}
-                            </Badge>
-                          )}
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="pb-6">

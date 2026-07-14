@@ -71,9 +71,8 @@ export function Services() {
           */}
           <div className="mb-10 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex sm:justify-center">
             <TabsList className={cn(
-              "flex flex-nowrap w-full sm:w-auto overflow-x-auto scrollbar-none",
+              "flex flex-col sm:flex-row w-full sm:w-auto",
               "bg-secondary/50 border border-border/80 p-1.5 gap-1.5 rounded-2xl",
-              // Ensure no wrapping on mobile
               "min-w-0"
             )}>
               {tabKeys.map((key) => {
@@ -83,8 +82,8 @@ export function Services() {
                     key={key}
                     value={key}
                     className={cn(
-                      "flex items-center gap-2 text-sm font-semibold transition-all shrink-0",
-                      "data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-lg data-[state=active]:shadow-black/20",
+                      "flex items-center gap-2 text-sm font-semibold transition-all shrink-0 justify-center w-full sm:w-auto",
+                      "data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-lg data-[state=active]:shadow-black/5 dark:data-[state=active]:shadow-black/20",
                       "px-4 py-2.5 rounded-xl whitespace-nowrap"
                     )}
                   >

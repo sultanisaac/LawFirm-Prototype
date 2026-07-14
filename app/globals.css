@@ -4,9 +4,39 @@
 
 @layer base {
   :root {
+    --background: 0 0% 100%;
+    --foreground: 225 22% 6%;
+    --card: 0 0% 98%;
+    --card-foreground: 225 22% 6%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 225 22% 6%;
+    --primary: 38 78% 52%;
+    --primary-foreground: 225 22% 6%;
+    --secondary: 225 10% 94%;
+    --secondary-foreground: 225 22% 6%;
+    --muted: 225 10% 94%;
+    --muted-foreground: 225 10% 40%;
+    --accent: 38 78% 52%;
+    --accent-foreground: 225 22% 6%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 225 10% 90%;
+    --input: 225 10% 90%;
+    --ring: 38 78% 52%;
+    --bg-glow: 38 78% 52% / 0.04;
+    --bg-dot: 220 18% 75% / 0.4;
+    --chart-1: 38 78% 52%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 200 65% 60%;
+    --chart-5: 340 75% 55%;
+    --radius: 0.5rem;
+  }
+  
+  .dark {
     --background: 225 22% 6%;
     --foreground: 38 12% 90%;
-    --card: 225 22% 9%;
+    --card: 225 18% 10%;
     --card-foreground: 38 12% 90%;
     --popover: 225 22% 9%;
     --popover-foreground: 38 12% 90%;
@@ -18,17 +48,13 @@
     --muted-foreground: 220 8% 52%;
     --accent: 38 78% 52%;
     --accent-foreground: 225 22% 6%;
-    --destructive: 0 68% 54%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 38 12% 90%;
     --border: 225 18% 16%;
     --input: 225 18% 13%;
     --ring: 38 78% 52%;
-    --chart-1: 38 78% 52%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 200 65% 60%;
-    --chart-5: 340 75% 55%;
-    --radius: 0.5rem;
+    --bg-glow: 38 78% 52% / 0.07;
+    --bg-dot: 220 18% 22% / 0.55;
   }
 }
 
@@ -40,8 +66,8 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(38 78% 52% / 0.07) 0%, transparent 60%),
-      radial-gradient(circle at 1px 1px, hsl(220 18% 22% / 0.55) 1px, transparent 0);
+      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(var(--bg-glow)) 0%, transparent 60%),
+      radial-gradient(circle at 1px 1px, hsl(var(--bg-dot)) 1px, transparent 0);
     background-size: 100% 100%, 28px 28px;
   }
   ::selection {
