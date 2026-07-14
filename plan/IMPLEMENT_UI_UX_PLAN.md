@@ -30,7 +30,7 @@
 ## 5. FAQ Section — Scannability & Trust
 - [x] Categorize questions with labels (e.g., "Fees & Billing").
 - [x] WhatsApp micro-CTA turned into pill buttons inside accordions.
-- [x] Add "Popular" or "Most Asked" badges.
+- [x] Remove "Popular" or "Most Asked" badges.
 - [x] Bump mobile text size for accordion triggers to `text-base`.
 - [x] Standardize eyebrow label to Title Case.
 

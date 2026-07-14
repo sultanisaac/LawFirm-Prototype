@@ -15,18 +15,13 @@ export function HowItWorks() {
   return (
     <section
       id="process"
-      className="section-padding border-t border-border/50 relative overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(180deg, hsl(225 22% 8% / 0.6) 0%, hsl(225 22% 6%) 100%)",
-      }}
+      className="section-padding border-t border-border/50 relative overflow-hidden bg-background"
     >
       {/* Dot grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage:
-            "radial-gradient(circle at 1px 1px, hsl(220 18% 24% / 0.4) 1px, transparent 0)",
+          backgroundImage: "radial-gradient(circle at 1px 1px, hsl(var(--bg-dot)) 1px, transparent 0)",
           backgroundSize: "28px 28px",
         }}
       />
@@ -100,7 +95,7 @@ export function HowItWorks() {
         </div>
 
         {/* Response time + CTA bar */}
-        <div className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-5 bg-white/[0.03] backdrop-blur-sm border border-amber-500/15 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden group">
+        <div className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-5 bg-card/60 backdrop-blur-sm border border-amber-500/15 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/[0.04] rounded-full -mr-20 -mt-20 blur-2xl pointer-events-none" />
           <div className="text-center sm:text-left relative z-10">
             <p className="text-[10px] font-black uppercase tracking-widest text-amber-500 mb-1.5">

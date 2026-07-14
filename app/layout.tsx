@@ -1,14 +1,14 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Outfit } from 'next/font/google';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { BookingProvider } from '@/context/BookingContext';
 import { PrototypeBanner } from '@/components/PrototypeBanner';
 import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
 import { BookingModal } from '@/components/booking/BookingModal';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
-
-const inter = Inter({ subsets: ['latin'] });
+const outfit = Outfit({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'NUSALEXA LAW OFFICE - Law Firm Prototype',
@@ -26,15 +26,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen`}>
-        <PrototypeBanner />
-        <LanguageProvider>
-          <BookingProvider>
-            <BookingModal />
-            {children}
-            <FloatingWhatsApp />
-          </BookingProvider>
-        </LanguageProvider>
+      <body className={`${outfit.className} min-h-screen`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <PrototypeBanner />
+          <LanguageProvider>
+            <BookingProvider>
+              <BookingModal />
+              {children}
+              <FloatingWhatsApp />
+            </BookingProvider>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

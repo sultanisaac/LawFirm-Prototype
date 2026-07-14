@@ -15,7 +15,7 @@ export default function PrivacyPage() {
       <ActiveHeader />
       <main className="flex-1 relative overflow-hidden pt-28 pb-20 lg:pt-36 lg:pb-32">
         {/* Background layers */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0b0e14] via-[#10141e] to-[#0b0e14] pointer-events-none" />
+        <div className="absolute inset-0 bg-background pointer-events-none" />
         <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-amber-500/[0.04] blur-[120px] pointer-events-none" />
         
         <div className="container-wide relative z-10 max-w-4xl mx-auto px-4">
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
               <p className="text-sm font-bold tracking-widest uppercase text-amber-500">Legal Agreement</p>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-6">
+            <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground mb-6">
               {t.privacy.title}
             </h1>
             <p className="text-muted-foreground/80 font-medium leading-relaxed max-w-2xl">
@@ -46,11 +46,11 @@ export default function PrivacyPage() {
             </p>
           </div>
 
-          <div className="prose prose-invert prose-amber max-w-none prose-headings:font-black prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground/90 prose-p:leading-relaxed prose-li:text-muted-foreground/90 bg-[#10141e]/50 backdrop-blur-xl border border-white/5 rounded-3xl p-8 sm:p-12 shadow-2xl">
+          <div className="prose prose-amber max-w-none prose-headings:font-black prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground/90 prose-p:leading-relaxed prose-li:text-muted-foreground/90 bg-card/50 backdrop-blur-xl border border-border/50 rounded-3xl p-8 sm:p-12 shadow-2xl">
             {t.privacy.sections.map((section: any, i: number) => (
               <div key={i} className="mb-8 last:mb-0">
-                <h2 className="text-2xl font-bold text-white mb-4">{section.title}</h2>
-                <p className="text-white/70 leading-relaxed">{section.body}</p>
+                <h2 className="text-2xl font-bold text-foreground mb-4">{section.title}</h2>
+                <p className="text-muted-foreground leading-relaxed">{section.body}</p>
               </div>
             ))}
           </div>
